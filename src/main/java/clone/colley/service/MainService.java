@@ -34,7 +34,8 @@ public class MainService {
                     posts.getCommentCnt(),
                     posts.getLikeCnt(),
                     posts.getUser().getNickname(),
-                    posts.getUser().getProfileUrl()
+                    posts.getUser().getProfileUrl(),
+                    posts.getCreatedAt()
                     );
             mainResponseDtoList.add(mainResponseDto);
         }
@@ -52,7 +53,8 @@ public class MainService {
                     posts.getCommentCnt(),
                     posts.getLikeCnt(),
                     posts.getUser().getNickname(),
-                    posts.getUser().getProfileUrl()
+                    posts.getUser().getProfileUrl(),
+                    posts.getCreatedAt()
             );
             mainResponseDtoList.add(mainResponseDto);
         }

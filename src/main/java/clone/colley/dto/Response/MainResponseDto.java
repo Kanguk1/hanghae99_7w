@@ -25,4 +25,7 @@ public class MainResponseDto {
 
     private String profileUrl;
 
+    //글 작성 시간
+    private LocalDateTime postDate;
+  
 }
