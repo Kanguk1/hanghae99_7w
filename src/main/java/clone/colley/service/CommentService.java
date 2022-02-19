@@ -48,8 +48,8 @@ public class CommentService {
             CommentResponseDto commentResponseDto = new CommentResponseDto(
                     comment.getCommentId(),
                     comment.getUser().getNickname(),
-                    comment.getUser().getUsername(),
                     comment.getComment(),
+                    comment.getUser().getUsername(),
                     comment.getCreatedAt()
             );
             commentResponseDtos.add(commentResponseDto);
