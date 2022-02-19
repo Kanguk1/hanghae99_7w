@@ -34,6 +34,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Posts> postList;
 
+    @OneToMany(mappedBy = "user")
+    private List<Comment> commentList;
+
 
     public User(String username, String password, String nickname) {
 

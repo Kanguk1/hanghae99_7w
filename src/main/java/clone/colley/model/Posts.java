@@ -29,13 +29,13 @@ public class Posts extends Timestamped{
     private String imgUrl;
 
 
-    @JoinColumn(name = "user_userId")
+    @JoinColumn(name = "userId")
     @ManyToOne
     private User user;
 
-//    @JsonBackReference
-//    @OneToMany(mappedBy = "posts")
-//    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "posts")
+    private List<Comment> comments;
 
     //    @Column(nullable = false)
 //    private Long tagId; 태그기능 보류
