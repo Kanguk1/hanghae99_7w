@@ -1,6 +1,6 @@
 package clone.colley.service;
 
-import clone.colley.dto.Request.SignupRequestDto;
+import clone.colley.dto.SignupRequestDto;
 import clone.colley.model.User;
 import clone.colley.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

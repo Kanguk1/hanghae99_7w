@@ -18,7 +18,7 @@ public class Tag {
     private Long tagId;
 
     @JsonManagedReference
-    @JoinColumn(name = "postId")
+    @JoinColumn(name = "PostId")
     @ManyToOne
     private Posts posts;
 

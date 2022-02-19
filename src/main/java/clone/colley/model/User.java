@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Setter
 @Getter
@@ -14,7 +13,7 @@ import java.util.List;
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long userId;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -30,12 +29,6 @@ public class User {
 
     @Column
     private String introduce;
-
-    @OneToMany(mappedBy = "user")
-    private List<Posts> postList;
-
-    @OneToMany(mappedBy = "user")
-    private List<Comment> commentList;
 
 
     public User(String username, String password, String nickname) {
