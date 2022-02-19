@@ -20,5 +20,6 @@ public class PostRequestDto {
     //글 내용
     private String content;
 
-    private List<String> tags;
+    //태그 리스트트
+   private List<String> tags;
 }
