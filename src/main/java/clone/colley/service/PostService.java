@@ -54,6 +54,8 @@ public class PostService {
         responseDto.setTitle(posts.getTitle());
         responseDto.setContent(posts.getContent());
         responseDto.setPostDate(posts.getCreatedAt());
+        responseDto.setLikeCnt(posts.getLikeCnt());
+        responseDto.setCommentCnt(posts.getCommentCnt());
         responseDto.setImaUrl(posts.getImgUrl());
         responseDto.setProfileUrl(posts.getUser().getProfileUrl());
         responseDto.setNickname(posts.getUser().getNickname());
