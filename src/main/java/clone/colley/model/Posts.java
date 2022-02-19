@@ -53,4 +53,10 @@ public class Posts extends Timestamped{
         this.user=user;
     }
 
+    public void update(String content, String imgUrl, String title) {
+        this.content = content;
+        this.imgUrl = imgUrl;
+        this.title = title;
+    }
+
 }

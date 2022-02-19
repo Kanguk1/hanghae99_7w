@@ -26,18 +26,20 @@ public class PostService {
     //게시글 수정
     @Transactional
     public Boolean postUpdate(PostRequestDto requestDto, Long postId,UserDetailsImpl userDetails) {
-        Posts posts=postRepository.findById(postId).orElseThrow(
-                ()->new NullPointerException("수정할 게시글이 없습니다.")
+        Posts posts = postRepository.findById(postId).orElseThrow(
+                () -> new NullPointerException("수정할 게시글이 없습니다.")
         );
-        if(posts.getUser().equals(userDetails.getUser())){
-            posts.setTitle(requestDto.getTitle());
-            posts.setContent(requestDto.getContent());
-            posts.setImgUrl(requestDto.getImgUrl());
-            return true;
-        } else{
-            return false;
-        }
-
+        posts.update(requestDto.getContent(), requestDto.getImgUrl(),requestDto.getTitle());
+//        if(posts.getUser().equals(userDetails.getUser())){
+//            posts.setTitle(requestDto.getTitle());
+//            posts.setContent(requestDto.getContent());
+//            posts.setImgUrl(requestDto.getImgUrl());
+//            posts.update(requestDto.getContent(), requestDto.getImgUrl(),requestDto.getTitle());
+//            return true;
+//        } else{
+//            return false;
+//        }
+        return true;
     }
 
     //게시글 삭제
@@ -46,13 +48,14 @@ public class PostService {
         Posts posts=postRepository.findById(postId).orElseThrow(
                 ()->new NullPointerException("삭제할 게시글이 없습니다.")
         );
-        if(posts.getUser().equals(userDetails.getUser())){
-            postRepository.deleteById(posts.getPostId());
-            return true;
-        } else{
-            return false;
-        }
-
+        postRepository.delete(posts);
+//        if(posts.getUser().equals(userDetails.getUser())){
+//            postRepository.deleteById(posts.getPostId());
+//            return true;
+//        } else{
+//            return false;
+//        }
+        return true;
     }
 
     //게시글 상세조회
