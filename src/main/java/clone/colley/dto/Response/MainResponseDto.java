@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 
 @Data
+@AllArgsConstructor
 public class MainResponseDto {
 
     private Long postId;
@@ -24,11 +25,4 @@ public class MainResponseDto {
 
     private String profileUrl;
 
-    public MainResponseDto(Long postId, String imgUrl, String title, String nickname, String profileUrl) {
-        this.postId=postId;
-        this.imgUrl=imgUrl;
-        this.title=title;
-        this.nickname=nickname;
-        this.profileUrl=profileUrl;
-    }
 }

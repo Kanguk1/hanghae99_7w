@@ -31,8 +31,8 @@ public class MainService {
                     posts.getPostId(),
                     posts.getImgUrl(),
                     posts.getTitle(),
-//                    posts.getCommentCnt(),
-//                    posts.getLikeCnt(),
+                    posts.getCommentCnt(),
+                    posts.getLikeCnt(),
                     posts.getUser().getNickname(),
                     posts.getUser().getProfileUrl()
                     );
@@ -40,22 +40,22 @@ public class MainService {
         }
         return mainResponseDtoList;
     }
-//
-//    public List<MainResponseDto> getAllPageLiked() {
-//        List<Posts> postsList = mainRepository.OrderByLikeCntDesc();
-//        List<MainResponseDto> mainResponseDtoList = new ArrayList<>();
-//        for (Posts posts : postsList) {
-//            MainResponseDto mainResponseDto = new MainResponseDto(
-//                    posts.getPostId(),
-//                    posts.getImgUrl(),
-//                    posts.getTitle(),
-//                    posts.getCommentCnt(),
-//                    posts.getLikeCnt(),
-//                    posts.getUser().getNickname(),
-//                    posts.getUser().getProfileUrl()
-//            );
-//            mainResponseDtoList.add(mainResponseDto);
-//        }
-//        return mainResponseDtoList;
-//    }
+
+    public List<MainResponseDto> getAllPageLiked() {
+        List<Posts> postsList = mainRepository.OrderByLikeCntDesc();
+        List<MainResponseDto> mainResponseDtoList = new ArrayList<>();
+        for (Posts posts : postsList) {
+            MainResponseDto mainResponseDto = new MainResponseDto(
+                    posts.getPostId(),
+                    posts.getImgUrl(),
+                    posts.getTitle(),
+                    posts.getCommentCnt(),
+                    posts.getLikeCnt(),
+                    posts.getUser().getNickname(),
+                    posts.getUser().getProfileUrl()
+            );
+            mainResponseDtoList.add(mainResponseDto);
+        }
+        return mainResponseDtoList;
+    }
 }
