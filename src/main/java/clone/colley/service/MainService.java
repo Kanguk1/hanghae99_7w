@@ -1,10 +1,9 @@
 package clone.colley.service;
 
-import clone.colley.dto.MainResponseDto;
+import clone.colley.dto.Response.MainResponseDto;
 import clone.colley.model.Posts;
 import clone.colley.repository.MainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -35,7 +34,8 @@ public class MainService {
                     posts.getCommentCnt(),
                     posts.getLikeCnt(),
                     posts.getUser().getNickname(),
-                    posts.getUser().getProfileUrl()
+                    posts.getUser().getProfileUrl(),
+                    posts.getCreatedAt()
                     );
             mainResponseDtoList.add(mainResponseDto);
         }
@@ -53,7 +53,8 @@ public class MainService {
                     posts.getCommentCnt(),
                     posts.getLikeCnt(),
                     posts.getUser().getNickname(),
-                    posts.getUser().getProfileUrl()
+                    posts.getUser().getProfileUrl(),
+                    posts.getCreatedAt()
             );
             mainResponseDtoList.add(mainResponseDto);
         }

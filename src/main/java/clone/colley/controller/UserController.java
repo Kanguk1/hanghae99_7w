@@ -1,7 +1,7 @@
 package clone.colley.controller;
 
 
-import clone.colley.dto.SignupRequestDto;
+import clone.colley.dto.Request.SignupRequestDto;
 import clone.colley.dto.UserInfoDto;
 import clone.colley.repository.UserRepository;
 import clone.colley.security.UserDetailsImpl;
@@ -29,6 +29,7 @@ public class UserController {
         this.userService = userService;
         this.userRepository = userRepository;
     }
+
 
     //회원가입
     @PostMapping("/signup")

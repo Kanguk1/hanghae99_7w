@@ -1,6 +1,6 @@
 package clone.colley.controller;
 
-import clone.colley.dto.MainResponseDto;
+import clone.colley.dto.Response.MainResponseDto;
 import clone.colley.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
