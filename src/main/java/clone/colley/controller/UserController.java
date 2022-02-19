@@ -3,6 +3,7 @@ package clone.colley.controller;
 
 import clone.colley.dto.SignupRequestDto;
 import clone.colley.dto.UserInfoDto;
+import clone.colley.repository.UserRepository;
 import clone.colley.security.UserDetailsImpl;
 import clone.colley.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +21,13 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserRepository userRepository) {
+
         this.userService = userService;
-    }
-
-
-    // 회원 로그인 페이지
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    // 회원 가입 페이지
-    @GetMapping("/signup")
-    public String signup() {
-        return "signupup";
+        this.userRepository = userRepository;
     }
 
     //회원가입

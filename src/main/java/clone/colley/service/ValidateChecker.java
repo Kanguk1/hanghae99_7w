@@ -14,7 +14,6 @@ public class ValidateChecker {
 //            throw new NullPointerException("유효하지 않은 사용자입니다.");
 //        }
 //    }
-
     public static void registerValidCheck(SignupRequestDto signupRequestDto) {
         // 회원 ID 중복 확인
         // 1. 닉네임이 3~20자의 대소문자/숫자 조합인지
