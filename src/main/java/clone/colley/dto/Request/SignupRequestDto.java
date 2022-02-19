@@ -1,4 +1,4 @@
-package clone.colley.dto;
+package clone.colley.dto.Request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
