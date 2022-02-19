@@ -48,8 +48,6 @@ public class Posts extends Timestamped{
         this.title=requestDto.getTitle();
         this.content=requestDto.getContent();
         this.imgUrl=requestDto.getImgUrl();
-        this.likeCnt=0;
-        this.commentCnt=0;
         this.user=user;
     }
 

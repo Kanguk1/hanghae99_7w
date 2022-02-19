@@ -1,14 +1,12 @@
-package clone.colley.dto.Response;
+package clone.colley.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-
-@Data
 @AllArgsConstructor
+@Data
 public class MainResponseDto {
 
     private Long postId;
@@ -24,8 +22,4 @@ public class MainResponseDto {
     private String nickname;
 
     private String profileUrl;
-
-    //글 작성 시간
-    private LocalDateTime postDate;
-
 }
