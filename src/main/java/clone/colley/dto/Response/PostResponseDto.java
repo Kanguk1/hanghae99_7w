@@ -1,5 +1,6 @@
 package clone.colley.dto.Response;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,4 +34,5 @@ public class PostResponseDto {
 
     //로그인한 유저의 해당 글 좋아요 여부
     private boolean islike;
+
 }
