@@ -27,6 +27,8 @@ public class PostResponseDto {
     private Integer commentCnt;
 
 
+    //작성자의 username
+    private String username;
     //작성자의 프로필 img
     private String profileUrl;
     //작성자의 nickname
