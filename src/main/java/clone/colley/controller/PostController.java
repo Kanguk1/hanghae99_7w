@@ -22,10 +22,10 @@ public class PostController {
 
     //게시글 작성
     @PostMapping("/post")
-    public boolean postRegister(@RequestBody PostRequestDto requestDto,
+    public Long postRegister(@RequestBody PostRequestDto requestDto,
                              @AuthenticationPrincipal UserDetailsImpl userDetails){
-        postService.postRegister(requestDto,userDetails);
-        return true;
+
+        return postService.postRegister(requestDto,userDetails);
     }
 
 

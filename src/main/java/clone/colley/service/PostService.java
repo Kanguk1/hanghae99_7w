@@ -18,9 +18,9 @@ public class PostService {
 
     //게시글 작성
     @Transactional
-    public void postRegister(PostRequestDto requestDto, UserDetailsImpl userDetails) {
+    public Long postRegister(PostRequestDto requestDto, UserDetailsImpl userDetails) {
         Posts posts=new Posts(requestDto,userDetails.getUser());
-        postRepository.save(posts);
+        return postRepository.save(posts).getPostId();
     }
 
     //게시글 수정
