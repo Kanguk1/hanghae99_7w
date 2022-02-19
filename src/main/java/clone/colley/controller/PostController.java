@@ -22,7 +22,7 @@ public class PostController {
 
     //게시글 작성
     @PostMapping("/post")
-    public Boolean postRegister(@RequestBody PostRequestDto requestDto,
+    public boolean postRegister(@RequestBody PostRequestDto requestDto,
                              @AuthenticationPrincipal UserDetailsImpl userDetails){
         postService.postRegister(requestDto,userDetails);
         return true;
@@ -31,7 +31,7 @@ public class PostController {
 
     //게시글 수정
     @PutMapping("/post/{postId}")
-    public Boolean postUpdate(@PathVariable Long postId,
+    public boolean postUpdate(@PathVariable Long postId,
                            @RequestBody PostRequestDto requestDto,
                               @AuthenticationPrincipal UserDetailsImpl userDetails){
         return  postService.postUpdate(requestDto,postId,userDetails);
@@ -39,7 +39,7 @@ public class PostController {
 
     //게시글 삭제
     @DeleteMapping("/post/{postId}")
-    public Boolean postDelete(@PathVariable Long postId,
+    public boolean postDelete(@PathVariable Long postId,
                               @AuthenticationPrincipal UserDetailsImpl userDetails){
         return  postService.deletePost(postId,userDetails);
     }
