@@ -15,5 +15,7 @@ public class CommentResponseDto {
 
     private String comment;
 
+    private String username;
+
     private LocalDateTime commentDate;
 }
