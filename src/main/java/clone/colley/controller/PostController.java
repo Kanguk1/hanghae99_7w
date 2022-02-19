@@ -22,22 +22,25 @@ public class PostController {
 
     //게시글 작성
     @PostMapping("/post")
-    public void postRegister(@RequestBody PostRequestDto requestDto,
+    public Boolean postRegister(@RequestBody PostRequestDto requestDto,
                              @AuthenticationPrincipal UserDetailsImpl userDetails){
         postService.postRegister(requestDto,userDetails);
+        return true;
     }
 
 
     //게시글 수정
     @PutMapping("/post/{postId}")
-    public void postUpdate(@PathVariable Long postId,
-                           @RequestBody PostRequestDto requestDto){
-       postService.postUpdate(requestDto,postId);
+    public Boolean postUpdate(@PathVariable Long postId,
+                           @RequestBody PostRequestDto requestDto,
+                              @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return  postService.postUpdate(requestDto,postId,userDetails);
     }
 
     //게시글 삭제
     @DeleteMapping("/post/{postId}")
-    public void postDelete(@PathVariable Long postId){
-        postService.deletePost(postId);
+    public Boolean postDelete(@PathVariable Long postId,
+                              @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return  postService.deletePost(postId,userDetails);
     }
 }
