@@ -25,7 +25,7 @@ public class User {
     private String nickname;
 
     @Column
-    private String image;
+    private String profileUrl;
 
     @Column
     private String introduce;
