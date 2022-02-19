@@ -29,17 +29,15 @@ public class PostService {
         Posts posts = postRepository.findById(postId).orElseThrow(
                 () -> new NullPointerException("수정할 게시글이 없습니다.")
         );
-        posts.update(requestDto.getContent(), requestDto.getImgUrl(),requestDto.getTitle());
-//        if(posts.getUser().equals(userDetails.getUser())){
-//            posts.setTitle(requestDto.getTitle());
-//            posts.setContent(requestDto.getContent());
-//            posts.setImgUrl(requestDto.getImgUrl());
-//            posts.update(requestDto.getContent(), requestDto.getImgUrl(),requestDto.getTitle());
-//            return true;
-//        } else{
-//            return false;
-//        }
-        return true;
+            if(posts.getUser().getUserId().equals(userDetails.getUser().getUserId())){
+            posts.setTitle(requestDto.getTitle());
+            posts.setContent(requestDto.getContent());
+            posts.setImgUrl(requestDto.getImgUrl());
+            posts.update(requestDto.getContent(), requestDto.getImgUrl(),requestDto.getTitle());
+            return true;
+        } else{
+            return false;
+        }
     }
 
     //게시글 삭제
@@ -48,14 +46,12 @@ public class PostService {
         Posts posts=postRepository.findById(postId).orElseThrow(
                 ()->new NullPointerException("삭제할 게시글이 없습니다.")
         );
-        postRepository.delete(posts);
-//        if(posts.getUser().equals(userDetails.getUser())){
-//            postRepository.deleteById(posts.getPostId());
-//            return true;
-//        } else{
-//            return false;
-//        }
-        return true;
+        if(posts.getUser().getUserId().equals(userDetails.getUser().getUserId())){
+            postRepository.deleteById(posts.getPostId());
+            return true;
+        } else{
+            return false;
+        }
     }
 
     //게시글 상세조회
