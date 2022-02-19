@@ -1,10 +1,9 @@
 package clone.colley.service;
 
-import clone.colley.dto.MainResponseDto;
+import clone.colley.dto.Response.MainResponseDto;
 import clone.colley.model.Posts;
 import clone.colley.repository.MainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,8 +31,8 @@ public class MainService {
                     posts.getPostId(),
                     posts.getImgUrl(),
                     posts.getTitle(),
-                    posts.getCommentCnt(),
-                    posts.getLikeCnt(),
+//                    posts.getCommentCnt(),
+//                    posts.getLikeCnt(),
                     posts.getUser().getNickname(),
                     posts.getUser().getProfileUrl()
                     );
@@ -41,22 +40,22 @@ public class MainService {
         }
         return mainResponseDtoList;
     }
-
-    public List<MainResponseDto> getAllPageLiked() {
-        List<Posts> postsList = mainRepository.OrderByLikeCntDesc();
-        List<MainResponseDto> mainResponseDtoList = new ArrayList<>();
-        for (Posts posts : postsList) {
-            MainResponseDto mainResponseDto = new MainResponseDto(
-                    posts.getPostId(),
-                    posts.getImgUrl(),
-                    posts.getTitle(),
-                    posts.getCommentCnt(),
-                    posts.getLikeCnt(),
-                    posts.getUser().getNickname(),
-                    posts.getUser().getProfileUrl()
-            );
-            mainResponseDtoList.add(mainResponseDto);
-        }
-        return mainResponseDtoList;
-    }
+//
+//    public List<MainResponseDto> getAllPageLiked() {
+//        List<Posts> postsList = mainRepository.OrderByLikeCntDesc();
+//        List<MainResponseDto> mainResponseDtoList = new ArrayList<>();
+//        for (Posts posts : postsList) {
+//            MainResponseDto mainResponseDto = new MainResponseDto(
+//                    posts.getPostId(),
+//                    posts.getImgUrl(),
+//                    posts.getTitle(),
+//                    posts.getCommentCnt(),
+//                    posts.getLikeCnt(),
+//                    posts.getUser().getNickname(),
+//                    posts.getUser().getProfileUrl()
+//            );
+//            mainResponseDtoList.add(mainResponseDto);
+//        }
+//        return mainResponseDtoList;
+//    }
 }
