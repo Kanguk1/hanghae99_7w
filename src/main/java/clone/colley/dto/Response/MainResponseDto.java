@@ -1,11 +1,12 @@
-package clone.colley.dto;
+package clone.colley.dto.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
+
 @Data
 public class MainResponseDto {
 
@@ -22,4 +23,12 @@ public class MainResponseDto {
     private String nickname;
 
     private String profileUrl;
+
+    public MainResponseDto(Long postId, String imgUrl, String title, String nickname, String profileUrl) {
+        this.postId=postId;
+        this.imgUrl=imgUrl;
+        this.title=title;
+        this.nickname=nickname;
+        this.profileUrl=profileUrl;
+    }
 }

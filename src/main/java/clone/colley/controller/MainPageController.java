@@ -1,6 +1,6 @@
 package clone.colley.controller;
 
-import clone.colley.dto.MainResponseDto;
+import clone.colley.dto.Response.MainResponseDto;
 import clone.colley.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,10 +24,10 @@ public class MainPageController {
         return mainService.getAllPageTimed();
     }
 
-    //좋아요순 정렬
-    @GetMapping("/likes")
-    public List<MainResponseDto> getAllPageLiked() {
-        return mainService.getAllPageLiked();
-    }
+//    //좋아요순 정렬
+//    @GetMapping("/likes")
+//    public List<MainResponseDto> getAllPageLiked() {
+//        return mainService.getAllPageLiked();
+//    }
 
 }

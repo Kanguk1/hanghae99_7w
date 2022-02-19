@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface MainRepository extends JpaRepository<Posts,Long> {
     List<Posts> findAllByUpdatedAtBetweenOrderByUpdatedAtDesc(LocalDateTime start, LocalDateTime end);
-    List<Posts> OrderByLikeCntDesc();
+//    List<Posts> OrderByLikeCntDesc();
 }

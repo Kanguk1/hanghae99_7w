@@ -19,12 +19,12 @@ public class Comment extends Timestamped{
     @Column(nullable = false)
     private String comment;
 
-    @JoinColumn(name = "UserId")
+    @JoinColumn(name = "userId")
     @ManyToOne
     private User user;
 
     @JsonManagedReference
-    @JoinColumn(name = "PostId")
+    @JoinColumn(name = "postId")
     @ManyToOne
     private Posts posts;
 }
