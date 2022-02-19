@@ -28,11 +28,16 @@ public class Posts extends Timestamped{
     @Column(nullable = false)
     private String imgUrl;
 
+    //좋아요 갯수
+    @Column(nullable = false)
+    private Integer likeCnt;
+    //댓글 갯수
+    @Column(nullable = false)
+    private Integer commentCnt;
 
     @JoinColumn(name = "userId")
     @ManyToOne
     private User user;
-
 
     @OneToMany(mappedBy = "posts")
     private List<Comment> comments;

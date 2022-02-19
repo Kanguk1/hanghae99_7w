@@ -24,10 +24,10 @@ public class MainPageController {
         return mainService.getAllPageTimed();
     }
 
-//    //좋아요순 정렬
-//    @GetMapping("/likes")
-//    public List<MainResponseDto> getAllPageLiked() {
-//        return mainService.getAllPageLiked();
-//    }
+    //좋아요순 정렬
+    @GetMapping("/likes")
+    public List<MainResponseDto> getAllPageLiked() {
+        return mainService.getAllPageLiked();
+    }
 
 }
