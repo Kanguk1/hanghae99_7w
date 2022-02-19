@@ -25,8 +25,8 @@ public class SignupRequestDto {
     @Pattern(regexp = "^[a-zA-Z0-9]{6,12}$", message = "비밀번호를 6~12자로 입력해주세요.(특수문자 제외)")
     private String password;
 
-//    @NotBlank(message = "비밀번호 확인을 입력해주세요.")
-//    private String passwordcheck;
+    @NotBlank(message = "비밀번호 확인을 입력해주세요.")
+    private String passwordcheck;
 
     @NotNull
     private String nickname;
