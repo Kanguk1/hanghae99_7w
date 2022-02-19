@@ -30,9 +30,6 @@ public class PostService {
                 () -> new NullPointerException("수정할 게시글이 없습니다.")
         );
             if(posts.getUser().getUserId().equals(userDetails.getUser().getUserId())){
-            posts.setTitle(requestDto.getTitle());
-            posts.setContent(requestDto.getContent());
-            posts.setImgUrl(requestDto.getImgUrl());
             posts.update(requestDto.getContent(), requestDto.getImgUrl(),requestDto.getTitle());
             return true;
         } else{
