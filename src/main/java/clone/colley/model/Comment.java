@@ -1,5 +1,6 @@
 package clone.colley.model;
 
+import clone.colley.dto.Request.CommentRequestDto;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,4 +28,14 @@ public class Comment extends Timestamped{
     @JoinColumn(name = "postId")
     @ManyToOne
     private Posts posts;
+
+    public Comment(CommentRequestDto commentRequestDto, User user, Posts posts) {
+        this.comment = commentRequestDto.getComment();
+        this.user = user;
+        this.posts = posts;
+    }
+
+    public Comment() {
+
+    }
 }
