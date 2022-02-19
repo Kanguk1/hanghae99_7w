@@ -29,10 +29,10 @@ public class Posts extends Timestamped{
     private String imgUrl;
 
     //좋아요 갯수
-    @Column(nullable = false)
+    @Column
     private Integer likeCnt;
     //댓글 갯수
-    @Column(nullable = false)
+    @Column
     private Integer commentCnt;
 
     @JoinColumn(name = "userId")
