@@ -42,7 +42,7 @@ public class Posts extends Timestamped{
     @OneToMany(mappedBy = "posts",cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    @OneToMany(mappedBy = "posts",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "posts")
     private List<Tag> tags;
 
     @OneToMany(mappedBy = "posts",cascade = CascadeType.ALL)

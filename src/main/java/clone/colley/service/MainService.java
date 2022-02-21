@@ -32,8 +32,6 @@ public class MainService {
                     posts.getImgUrl(),
                     posts.getTitle(),
                     posts.getComments().size(),
-//                    posts.getCommentCnt(),
-//                    posts.getLikeCnt(),
                     posts.getLikeUserList().size(),
                     posts.getUser().getNickname(),
                     posts.getUser().getProfileUrl(),

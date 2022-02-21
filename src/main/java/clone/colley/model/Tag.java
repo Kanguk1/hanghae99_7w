@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -16,7 +17,6 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long tagId;
-
 
     @JoinColumn(name = "postId")
     @ManyToOne

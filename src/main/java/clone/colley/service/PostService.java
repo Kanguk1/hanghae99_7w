@@ -25,9 +25,9 @@ public class PostService {
     @Transactional
     public Long postRegister(PostRequestDto requestDto, UserDetailsImpl userDetails) {
         Posts posts = new Posts(requestDto, userDetails.getUser());
-        List<String> tags=requestDto.getTags();
-        for(String stringTag:tags){
-            Tag tag=new Tag();
+        List<String> tags = requestDto.getTags();
+        for (String stringTag : tags) {
+            Tag tag = new Tag();
             tag.setPosts(posts);
             tag.setTag(stringTag);
             tagRepository.save(tag);
@@ -42,11 +42,51 @@ public class PostService {
                 () -> new NullPointerException("수정할 게시글이 없습니다.")
         );
         if (posts.getUser().getUserId().equals(userDetails.getUser().getUserId())) {
-            posts.update(requestDto.getContent(), requestDto.getImgUrl(), requestDto.getTitle());
-            return posts.getPostId();
+            List<String> updateTag = requestDto.getTags();
+            List<Tag> dbTagList = posts.getTags();
+            List<String> dbTagName = new ArrayList<>();
+            for (Tag tag : dbTagList) {
+                dbTagName.add(tag.getTag());
+            }
+            if (updateTag.size()==0) {
+                for (Tag tag : dbTagList) {
+                    tagRepository.deleteById(tag.getTagId());
+                }
+                posts.update(requestDto.getContent(), requestDto.getImgUrl(), requestDto.getTitle());
+                return posts.getPostId();
+            } else if (updateTag.size() > dbTagList.size()) {
+                for (String ut : updateTag) {
+                    if (!dbTagName.contains(ut)) {
+                        Tag tag = new Tag();
+                        tag.setPosts(posts);
+                        tag.setTag(ut);
+                        tagRepository.save(tag);
+                    }
+                }
+                posts.update(requestDto.getContent(), requestDto.getImgUrl(), requestDto.getTitle());
+                return posts.getPostId();
+            } else if (updateTag.size() == dbTagList.size()) {
+                for (String ut : updateTag) {
+                    if (!dbTagName.contains(ut)) {
+                        Tag tag = new Tag();
+                        tag.setPosts(posts);
+                        tag.setTag(ut);
+                        tagRepository.save(tag);
+                    }
+                }
+                for (String dt : dbTagName) {
+                    if (!updateTag.contains(dt)) {
+                        Tag tag= tagRepository.findTagByPostsAndTag(posts, dt);
+                        tagRepository.deleteById(tag.getTagId());
+                    }
+                }
+                posts.update(requestDto.getContent(), requestDto.getImgUrl(), requestDto.getTitle());
+                return posts.getPostId();
+            }
         } else {
             return 0L;
         }
+        return 0L;
     }
 
     //게시글 삭제
@@ -56,6 +96,7 @@ public class PostService {
                 () -> new NullPointerException("삭제할 게시글이 없습니다.")
         );
         if (posts.getUser().getUserId().equals(userDetails.getUser().getUserId())) {
+            tagRepository.deleteAllByPosts(posts);
             postRepository.deleteById(posts.getPostId());
             return true;
         } else {
@@ -80,9 +121,9 @@ public class PostService {
         responseDto.setUsername(posts.getUser().getUsername());
         responseDto.setProfileUrl(posts.getUser().getProfileUrl());
         responseDto.setNickname(posts.getUser().getNickname());
-        List<Tag> tagList=tagRepository.findTagByPosts(posts);
-        List<String> tags=new ArrayList<>();
-        for(Tag tag:tagList){
+        List<Tag> tagList = tagRepository.findTagByPosts(posts);
+        List<String> tags = new ArrayList<>();
+        for (Tag tag : tagList) {
             tags.add(tag.getTag());
         }
         responseDto.setTags(tags);
