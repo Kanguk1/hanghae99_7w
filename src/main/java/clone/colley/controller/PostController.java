@@ -41,7 +41,7 @@ public class PostController {
             @AuthenticationPrincipal UserDetailsImpl userDetails)
             throws IOException {
 
-        String image = s3Uploader.uploadFile(multipartFile, "static");
+        String image = s3Uploader.uploadFile(multipartFile, "postImage");
         requestDto.setImgUrl(image);
 
         return postService.postRegister(requestDto,userDetails);
