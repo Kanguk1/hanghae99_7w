@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,14 +20,18 @@ public class PostResponseDto {
     //글 작성 시간
     private LocalDateTime postDate;
     //글의 imageUrl
-    private String imaUrl;
+    private String imgUrl;
 
     //좋아요 갯수
     private Integer likeCnt;
     //댓글 갯수
     private Integer commentCnt;
 
+    //태그
+    private List<String> tags;
 
+    //작성자의 username
+    private String username;
     //작성자의 프로필 img
     private String profileUrl;
     //작성자의 nickname

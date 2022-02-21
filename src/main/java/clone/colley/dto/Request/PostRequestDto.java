@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,4 +19,7 @@ public class PostRequestDto {
 
     //글 내용
     private String content;
+
+    //태그 리스트트
+   private List<String> tags;
 }

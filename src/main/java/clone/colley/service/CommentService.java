@@ -7,6 +7,7 @@ import clone.colley.model.Posts;
 import clone.colley.model.User;
 import clone.colley.repository.CommentRepository;
 import clone.colley.repository.PostRepository;
+import clone.colley.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +50,9 @@ public class CommentService {
                     comment.getCommentId(),
                     comment.getUser().getNickname(),
                     comment.getComment(),
-                    comment.getCreatedAt()
+                    comment.getUser().getUsername(),
+                    comment.getCreatedAt(),
+                    comment.getUser().getProfileUrl()
             );
             commentResponseDtos.add(commentResponseDto);
         }
@@ -58,10 +61,16 @@ public class CommentService {
     }
 
     @Transactional
-    public void deleteComment(Long id) {
+    public boolean deleteComment(Long id, UserDetailsImpl userDetails) {
         Comment comment = commentRepository.findById(id).orElseThrow(
                 ()-> new IllegalArgumentException("댓글이 존재하지 않습니다")
         );
-        commentRepository.delete(comment);
+        if(comment.getUser().getUserId().equals(userDetails.getUser().getUserId())){
+            commentRepository.deleteById(comment.getCommentId());
+            return true;
+        } else{
+            return false;
+        }
+
     }
 }

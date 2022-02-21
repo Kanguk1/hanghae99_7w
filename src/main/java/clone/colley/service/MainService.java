@@ -24,15 +24,15 @@ public class MainService {
         LocalDateTime start = LocalDateTime.now().minusDays(1);
         LocalDateTime end = LocalDateTime.now();
 
-        List<Posts> postsList = mainRepository.findAllByUpdatedAtBetweenOrderByUpdatedAtDesc(start, end);
+        List<Posts> postsList = mainRepository.findAll();
         List<MainResponseDto> mainResponseDtoList = new ArrayList<>();
         for (Posts posts : postsList) {
             MainResponseDto mainResponseDto = new MainResponseDto(
                     posts.getPostId(),
                     posts.getImgUrl(),
                     posts.getTitle(),
-                    posts.getCommentCnt(),
-                    posts.getLikeCnt(),
+                    posts.getComments().size(),
+                    posts.getLikeUserList().size(),
                     posts.getUser().getNickname(),
                     posts.getUser().getProfileUrl(),
                     posts.getCreatedAt()
@@ -42,22 +42,24 @@ public class MainService {
         return mainResponseDtoList;
     }
 
-    public List<MainResponseDto> getAllPageLiked() {
-        List<Posts> postsList = mainRepository.OrderByLikeCntDesc();
-        List<MainResponseDto> mainResponseDtoList = new ArrayList<>();
-        for (Posts posts : postsList) {
-            MainResponseDto mainResponseDto = new MainResponseDto(
-                    posts.getPostId(),
-                    posts.getImgUrl(),
-                    posts.getTitle(),
-                    posts.getCommentCnt(),
-                    posts.getLikeCnt(),
-                    posts.getUser().getNickname(),
-                    posts.getUser().getProfileUrl(),
-                    posts.getCreatedAt()
-            );
-            mainResponseDtoList.add(mainResponseDto);
-        }
-        return mainResponseDtoList;
-    }
+//    public List<MainResponseDto> getAllPageLiked() {
+//        List<Posts> postsList = mainRepository.OrderByLikeCntDesc();
+//        List<MainResponseDto> mainResponseDtoList = new ArrayList<>();
+//        for (Posts posts : postsList) {
+//            MainResponseDto mainResponseDto = new MainResponseDto(
+//                    posts.getPostId(),
+//                    posts.getImgUrl(),
+//                    posts.getTitle(),
+//                    posts.getComments().size(),
+////                    posts.getCommentCnt(),
+////                    posts.getLikeCnt(),
+//                    posts.getComments().size(),
+//                    posts.getUser().getNickname(),
+//                    posts.getUser().getProfileUrl(),
+//                    posts.getCreatedAt()
+//            );
+//            mainResponseDtoList.add(mainResponseDto);
+//        }
+//        return mainResponseDtoList;
+//    }
 }

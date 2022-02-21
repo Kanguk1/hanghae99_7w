@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -17,7 +18,6 @@ public class Tag {
     @Id
     private Long tagId;
 
-    @JsonManagedReference
     @JoinColumn(name = "postId")
     @ManyToOne
     private Posts posts;

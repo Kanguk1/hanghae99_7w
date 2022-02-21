@@ -29,28 +29,36 @@ public class Posts extends Timestamped{
     private String imgUrl;
 
     //좋아요 갯수
-    @Column
-    private Integer likeCnt;
-    //댓글 갯수
-    @Column
-    private Integer commentCnt;
+//    @Column
+//    private Integer likeCnt;
+//    //댓글 갯수
+//    @Column
+//    private Integer commentCnt;
 
     @JoinColumn(name = "userId")
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "posts")
+    @OneToMany(mappedBy = "posts",cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    //    @Column(nullable = false)
-//    private Long tagId; 태그기능 보류
+    @OneToMany(mappedBy = "posts")
+    private List<Tag> tags;
+
+    @OneToMany(mappedBy = "posts",cascade = CascadeType.ALL)
+    private List<LikeUser> likeUserList;
+
     public Posts(PostRequestDto requestDto,User user){
         this.title=requestDto.getTitle();
         this.content=requestDto.getContent();
         this.imgUrl=requestDto.getImgUrl();
-        this.likeCnt=0;
-        this.commentCnt=0;
         this.user=user;
+    }
+
+    public void update(String content, String imgUrl, String title) {
+        this.content = content;
+        this.imgUrl = imgUrl;
+        this.title = title;
     }
 
 }
