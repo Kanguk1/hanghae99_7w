@@ -1,8 +1,8 @@
 package clone.colley.dto.Response;
 
+import clone.colley.model.Posts;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -27,5 +27,27 @@ public class MainResponseDto {
 
     //글 작성 시간
     private LocalDateTime postDate;
-  
+
+
+
+
+
+//    public MainResponseDto(Posts posts, int likeCnt, int commentCnt)
+//    {
+//        this.postId = posts.getPostId();
+//        this.title =posts.getTitle();
+//        this.imgUrl =posts.getImgUrl();
+//        this.likeCnt = likeCnt;
+//        this.commentCnt = commentCnt;
+//        this.nickname =posts.getUser().getNickname();
+//    }
+
+    //////////////////////////////////
+    public MainResponseDto(Posts posts)
+    {
+        this.postId = posts.getPostId();
+        this.title =posts.getTitle();
+        this.imgUrl =posts.getImgUrl();
+        this.nickname =posts.getUser().getNickname();
+    }
 }
