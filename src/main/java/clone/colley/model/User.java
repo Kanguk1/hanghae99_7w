@@ -37,6 +37,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Comment> commentList;
 
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<LikeUser> likeUserList;
 
     public User(String username, String password, String nickname) {
 

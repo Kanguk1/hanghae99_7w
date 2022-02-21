@@ -25,14 +25,6 @@ public class PostController {
         return postService.postDetail(postId);
     }
 
-//    //게시글 작성 이미지 빼고
-//    @PostMapping("/post")
-//    public Long postRegister(@RequestBody PostRequestDto requestDto,
-//                             @AuthenticationPrincipal UserDetailsImpl userDetails){
-//
-//        return postService.postRegister(requestDto,userDetails);
-//    }
-
     //    게시글 작성
     @PostMapping("/post")
     public Long postRegister(
@@ -62,6 +54,7 @@ public class PostController {
 
         return  postService.postUpdate(requestDto,postId,userDetails);
     }
+
 
     //게시글 삭제
     @DeleteMapping("/post/{postId}")

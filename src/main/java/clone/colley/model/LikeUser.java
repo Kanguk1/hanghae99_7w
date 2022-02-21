@@ -1,6 +1,5 @@
 package clone.colley.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,4 +22,14 @@ public class LikeUser {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
+
+    @Column(columnDefinition = "false")
+    private Boolean isLike = false;
+
+
+    public LikeUser(Posts posts, User user, boolean requestDto) {
+        this.posts = posts;
+        this.user = user;
+        this.isLike = requestDto;
+    }
 }
