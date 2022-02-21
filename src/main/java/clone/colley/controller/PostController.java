@@ -50,9 +50,16 @@ public class PostController {
 
     //게시글 수정
     @PutMapping("/post/{postId}")
-    public Long postUpdate(@PathVariable Long postId,
-                           @RequestBody PostRequestDto requestDto,
-                              @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public Long postUpdate(
+            @RequestPart("image") MultipartFile multipartFile,
+            @PathVariable Long postId,
+            PostRequestDto requestDto,
+            @AuthenticationPrincipal UserDetailsImpl userDetails)
+            throws IOException {
+
+        String image = s3Uploader.uploadFile(multipartFile, "postImage");
+        requestDto.setImgUrl(image);
+
         return  postService.postUpdate(requestDto,postId,userDetails);
     }
 
