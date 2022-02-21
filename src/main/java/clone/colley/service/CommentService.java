@@ -51,7 +51,8 @@ public class CommentService {
                     comment.getUser().getNickname(),
                     comment.getComment(),
                     comment.getUser().getUsername(),
-                    comment.getCreatedAt()
+                    comment.getCreatedAt(),
+                    comment.getUser().getProfileUrl()
             );
             commentResponseDtos.add(commentResponseDto);
         }

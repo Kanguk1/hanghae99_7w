@@ -18,4 +18,6 @@ public class CommentResponseDto {
     private String username;
 
     private LocalDateTime commentDate;
+
+    private String profileUrl;
 }
