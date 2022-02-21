@@ -1,0 +1,11 @@
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIA42YZSXI35VXDDNVD
+      secretKey: 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
+    s3:
+      bucket: dongseok-bucket
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
