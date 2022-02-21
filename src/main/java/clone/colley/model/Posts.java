@@ -29,11 +29,11 @@ public class Posts extends Timestamped{
     private String imgUrl;
 
     //좋아요 갯수
-    @Column
-    private Integer likeCnt;
-    //댓글 갯수
-    @Column
-    private Integer commentCnt;
+//    @Column
+//    private Integer likeCnt;
+//    //댓글 갯수
+//    @Column
+//    private Integer commentCnt;
 
     @JoinColumn(name = "userId")
     @ManyToOne
@@ -45,12 +45,13 @@ public class Posts extends Timestamped{
     @OneToMany(mappedBy = "posts",cascade = CascadeType.ALL)
     private List<Tag> tags;
 
+    @OneToMany(mappedBy = "posts",cascade = CascadeType.ALL)
+    private List<LikeUser> likeUserList;
+
     public Posts(PostRequestDto requestDto,User user){
         this.title=requestDto.getTitle();
         this.content=requestDto.getContent();
         this.imgUrl=requestDto.getImgUrl();
-        this.likeCnt=0;
-        this.commentCnt=0;
         this.user=user;
     }
 

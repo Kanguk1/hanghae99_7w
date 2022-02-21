@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +27,8 @@ public class PostResponseDto {
     //댓글 갯수
     private Integer commentCnt;
 
+    //태그
+    private List<String> tags;
 
     //작성자의 username
     private String username;
