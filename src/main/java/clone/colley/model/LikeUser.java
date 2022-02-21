@@ -1,6 +1,5 @@
 package clone.colley.model;
 
-import clone.colley.dto.Request.LikeUserRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,13 +23,13 @@ public class LikeUser {
     @JoinColumn(name = "userId")
     private User user;
 
-    @Column
-    private Boolean isLike;
+    @Column(columnDefinition = "false")
+    private Boolean isLike = false;
 
 
-    public LikeUser(Posts posts, User user, LikeUserRequestDto requestDto) {
+    public LikeUser(Posts posts, User user, boolean requestDto) {
         this.posts = posts;
         this.user = user;
-        this.isLike = requestDto.getIsLike();
+        this.isLike = requestDto;
     }
 }
