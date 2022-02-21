@@ -26,10 +26,10 @@ public class PostService {
     public Long postRegister(PostRequestDto requestDto, UserDetailsImpl userDetails) {
         Posts posts = new Posts(requestDto, userDetails.getUser());
         List<String> tags=requestDto.getTags();
-        for(String stringtag:tags){
+        for(String stringTag:tags){
             Tag tag=new Tag();
             tag.setPosts(posts);
-            tag.setTag(stringtag);
+            tag.setTag(stringTag);
             tagRepository.save(tag);
         }
         return postRepository.save(posts).getPostId();
@@ -74,8 +74,8 @@ public class PostService {
         responseDto.setTitle(posts.getTitle());
         responseDto.setContent(posts.getContent());
         responseDto.setPostDate(posts.getCreatedAt());
-        responseDto.setLikeCnt(posts.getLikeCnt());
-        responseDto.setCommentCnt(posts.getCommentCnt());
+        responseDto.setLikeCnt(posts.getLikeUserList().size());
+        responseDto.setCommentCnt(posts.getComments().size());
         responseDto.setImaUrl(posts.getImgUrl());
         responseDto.setUsername(posts.getUser().getUsername());
         responseDto.setProfileUrl(posts.getUser().getProfileUrl());
