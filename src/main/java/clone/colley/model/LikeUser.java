@@ -1,7 +1,6 @@
 package clone.colley.model;
 
 import clone.colley.dto.Request.LikeUserRequestDto;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,11 +25,12 @@ public class LikeUser {
     private User user;
 
     @Column
-    private boolean isLike;
+    private Boolean isLike;
 
-    public LikeUser(Posts posts, User user, LikeUserRequestDto likeUserRequestDto) {
+
+    public LikeUser(Posts posts, User user, LikeUserRequestDto requestDto) {
         this.posts = posts;
         this.user = user;
-        this.isLike = likeUserRequestDto.getIsLike();
+        this.isLike = requestDto.getIsLike();
     }
 }
