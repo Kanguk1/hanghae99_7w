@@ -17,7 +17,6 @@ public class Tag {
     @Id
     private Long tagId;
 
-
     @JoinColumn(name = "postId")
     @ManyToOne
     private Posts posts;

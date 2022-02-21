@@ -47,6 +47,14 @@ public class PostService {
         } else {
             return 0L;
         }
+//        List<String> updateTags=requestDto.getTags();
+//        List<Tag> tagList=posts.getTags();
+//        for(String ut:updateTags){
+//            for(Tag tag:tagList){
+//                contains(ut);
+//            }
+//        }
+
     }
 
     //게시글 삭제
