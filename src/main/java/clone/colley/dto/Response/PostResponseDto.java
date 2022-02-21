@@ -20,7 +20,7 @@ public class PostResponseDto {
     //글 작성 시간
     private LocalDateTime postDate;
     //글의 imageUrl
-    private String imaUrl;
+    private String imgUrl;
 
     //좋아요 갯수
     private Integer likeCnt;
