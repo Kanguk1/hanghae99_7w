@@ -4,22 +4,34 @@ package clone.colley.service;
 import clone.colley.dto.Request.PostRequestDto;
 import clone.colley.dto.Response.PostResponseDto;
 import clone.colley.model.Posts;
+import clone.colley.model.Tag;
 import clone.colley.repository.PostRepository;
+import clone.colley.repository.TagRepository;
 import clone.colley.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
+    private final TagRepository tagRepository;
 
     //게시글 작성
     @Transactional
     public Long postRegister(PostRequestDto requestDto, UserDetailsImpl userDetails) {
         Posts posts = new Posts(requestDto, userDetails.getUser());
+        List<String> tags=requestDto.getTags();
+        for(String stringtag:tags){
+            Tag tag=new Tag();
+            tag.setPosts(posts);
+            tag.setTag(stringtag);
+            tagRepository.save(tag);
+        }
         return postRepository.save(posts).getPostId();
     }
 
@@ -68,6 +80,12 @@ public class PostService {
         responseDto.setUsername(posts.getUser().getUsername());
         responseDto.setProfileUrl(posts.getUser().getProfileUrl());
         responseDto.setNickname(posts.getUser().getNickname());
+        List<Tag> tagList=tagRepository.findTagByPosts(posts);
+        List<String> tags=new ArrayList<>();
+        for(Tag tag:tagList){
+            tags.add(tag.getTag());
+        }
+        responseDto.setTags(tags);
         return responseDto;
 
     }

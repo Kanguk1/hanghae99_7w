@@ -45,6 +45,9 @@ public class Posts extends Timestamped{
     @OneToMany(mappedBy = "posts",cascade = CascadeType.ALL)
     private List<Tag> tags;
 
+    @OneToMany(mappedBy = "posts",cascade = CascadeType.ALL)
+    private List<LikeUser> likeUserList;
+
     public Posts(PostRequestDto requestDto,User user){
         this.title=requestDto.getTitle();
         this.content=requestDto.getContent();
