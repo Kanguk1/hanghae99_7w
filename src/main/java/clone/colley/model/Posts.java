@@ -39,11 +39,12 @@ public class Posts extends Timestamped{
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "posts")
+    @OneToMany(mappedBy = "posts",cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    //    @Column(nullable = false)
-//    private Long tagId; 태그기능 보류
+    @OneToMany(mappedBy = "posts",cascade = CascadeType.ALL)
+    private List<Tag> tags;
+
     public Posts(PostRequestDto requestDto,User user){
         this.title=requestDto.getTitle();
         this.content=requestDto.getContent();
