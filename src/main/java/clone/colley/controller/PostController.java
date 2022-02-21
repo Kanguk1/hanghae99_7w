@@ -36,8 +36,8 @@ public class PostController {
     //    게시글 작성
     @PostMapping("/post")
     public Long postRegister(
-            @RequestPart("postImage") MultipartFile multipartFile,
-            @RequestPart("post") PostRequestDto requestDto,
+            @RequestPart("image") MultipartFile multipartFile,
+            PostRequestDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails)
             throws IOException {
 
