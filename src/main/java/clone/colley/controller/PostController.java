@@ -31,7 +31,7 @@ public class PostController {
 
     //게시글 수정
     @PutMapping("/post/{postId}")
-    public boolean postUpdate(@PathVariable Long postId,
+    public Long postUpdate(@PathVariable Long postId,
                            @RequestBody PostRequestDto requestDto,
                               @AuthenticationPrincipal UserDetailsImpl userDetails){
         return  postService.postUpdate(requestDto,postId,userDetails);
