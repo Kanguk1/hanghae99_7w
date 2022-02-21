@@ -19,34 +19,34 @@ public class PostService {
     //게시글 작성
     @Transactional
     public Long postRegister(PostRequestDto requestDto, UserDetailsImpl userDetails) {
-        Posts posts=new Posts(requestDto,userDetails.getUser());
+        Posts posts = new Posts(requestDto, userDetails.getUser());
         return postRepository.save(posts).getPostId();
     }
 
     //게시글 수정
     @Transactional
-    public Boolean postUpdate(PostRequestDto requestDto, Long postId,UserDetailsImpl userDetails) {
+    public Long postUpdate(PostRequestDto requestDto, Long postId, UserDetailsImpl userDetails) {
         Posts posts = postRepository.findById(postId).orElseThrow(
                 () -> new NullPointerException("수정할 게시글이 없습니다.")
         );
-            if(posts.getUser().getUserId().equals(userDetails.getUser().getUserId())){
-            posts.update(requestDto.getContent(), requestDto.getImgUrl(),requestDto.getTitle());
-            return true;
-        } else{
-            return false;
+        if (posts.getUser().getUserId().equals(userDetails.getUser().getUserId())) {
+            posts.update(requestDto.getContent(), requestDto.getImgUrl(), requestDto.getTitle());
+            return posts.getPostId();
+        } else {
+            return 0L;
         }
     }
 
     //게시글 삭제
     @Transactional
-    public Boolean deletePost(Long postId,UserDetailsImpl userDetails) {
-        Posts posts=postRepository.findById(postId).orElseThrow(
-                ()->new NullPointerException("삭제할 게시글이 없습니다.")
+    public Boolean deletePost(Long postId, UserDetailsImpl userDetails) {
+        Posts posts = postRepository.findById(postId).orElseThrow(
+                () -> new NullPointerException("삭제할 게시글이 없습니다.")
         );
-        if(posts.getUser().getUserId().equals(userDetails.getUser().getUserId())){
+        if (posts.getUser().getUserId().equals(userDetails.getUser().getUserId())) {
             postRepository.deleteById(posts.getPostId());
             return true;
-        } else{
+        } else {
             return false;
         }
     }
@@ -54,10 +54,10 @@ public class PostService {
     //게시글 상세조회
     @Transactional
     public PostResponseDto postDetail(Long postId) {
-        Posts posts=postRepository.findById(postId).orElseThrow(
-                ()->new NullPointerException("게시글이 없습니다.")
+        Posts posts = postRepository.findById(postId).orElseThrow(
+                () -> new NullPointerException("게시글이 없습니다.")
         );
-        PostResponseDto responseDto=new PostResponseDto();
+        PostResponseDto responseDto = new PostResponseDto();
         responseDto.setPostId(posts.getPostId());
         responseDto.setTitle(posts.getTitle());
         responseDto.setContent(posts.getContent());
@@ -68,7 +68,7 @@ public class PostService {
         responseDto.setUsername(posts.getUser().getUsername());
         responseDto.setProfileUrl(posts.getUser().getProfileUrl());
         responseDto.setNickname(posts.getUser().getNickname());
-        return  responseDto;
+        return responseDto;
 
     }
 }
