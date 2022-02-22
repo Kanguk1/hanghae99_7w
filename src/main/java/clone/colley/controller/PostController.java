@@ -42,18 +42,19 @@ public class PostController {
 
 
     //게시글 수정
-    @PutMapping("/post/{postId}")
+    @PatchMapping("/post/{postId}")
     public Long postUpdate(
             @RequestPart("image") MultipartFile multipartFile,
             @PathVariable Long postId,
             PostRequestDto requestDto,
-            @AuthenticationPrincipal UserDetailsImpl userDetails)
-            throws IOException {
-
-        String image = s3Uploader.uploadFile(multipartFile, "postImage");
-        requestDto.setImgUrl(image);
-
-        return  postService.postUpdate(requestDto,postId,userDetails);
+            @AuthenticationPrincipal UserDetailsImpl userDetails){
+        try {
+            String image = s3Uploader.uploadFile(multipartFile, "postImage");
+            requestDto.setImgUrl(image);
+            return  postService.postUpdate(requestDto,postId,userDetails);
+        } catch (Exception e) {
+            return  postService.PostUpdateNoImage(requestDto,postId,userDetails);
+        }
     }
 
 

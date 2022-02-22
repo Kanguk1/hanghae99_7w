@@ -33,7 +33,7 @@ public class MyPostController {
 
 
     // 유저정보 수정.
-    @PutMapping("/user/mypost/update")
+    @PatchMapping("/user/mypost/update")
     public MyResponse updateUser(
             @RequestPart("image") MultipartFile multipartFile,
             MyPostDto myPostDto,

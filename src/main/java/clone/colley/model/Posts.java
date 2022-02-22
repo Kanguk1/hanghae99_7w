@@ -61,4 +61,8 @@ public class Posts extends Timestamped{
         this.title = title;
     }
 
+    public void update(String content, String title) {
+        this.content = content;
+        this.title = title;
+    }
 }

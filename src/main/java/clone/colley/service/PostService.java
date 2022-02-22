@@ -13,6 +13,7 @@ import clone.colley.repository.TagRepository;
 import clone.colley.repository.UserRepository;
 import clone.colley.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,6 +23,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PostService {
     private final PostRepository postRepository;
     private final TagRepository tagRepository;
@@ -40,6 +42,65 @@ public class PostService {
             tagRepository.save(tag);
         }
         return postRepository.save(posts).getPostId();
+    }
+
+    //게시글 수정 이미지없이
+    @Transactional
+    public Long PostUpdateNoImage(PostRequestDto requestDto, Long postId, UserDetailsImpl userDetails) {
+        Posts posts = postRepository.findById(postId).orElseThrow(
+                () -> new NullPointerException("수정할 게시글이 없습니다.")
+        );
+        if (posts.getUser().getUserId().equals(userDetails.getUser().getUserId())) {
+            List<String> updateTag = requestDto.getTags();
+            List<Tag> dbTagList = posts.getTags();
+            List<String> dbTagName = new ArrayList<>();
+            for (Tag tag : dbTagList) {
+                dbTagName.add(tag.getTag());
+            }
+            if (updateTag.size()==0) {
+                for (Tag tag : dbTagList) {
+                    tagRepository.deleteById(tag.getTagId());
+                }
+                posts.update(requestDto.getContent(), requestDto.getTitle());
+                return posts.getPostId();
+            } else if (updateTag.size() > dbTagList.size()) {
+                for (String ut : updateTag) {
+                    if (!dbTagName.contains(ut)) {
+                        Tag tag = new Tag();
+                        tag.setPosts(posts);
+                        tag.setTag(ut);
+                        tagRepository.save(tag);
+                    }
+                }
+                posts.update(requestDto.getContent(), requestDto.getTitle());
+                log.info("이거왜안됨?2");
+                return posts.getPostId();
+            } else if (updateTag.size() == dbTagList.size()) {
+                for (String ut : updateTag) {
+                    if (!dbTagName.contains(ut)) {
+                        Tag tag = new Tag();
+                        tag.setPosts(posts);
+                        tag.setTag(ut);
+                        tagRepository.save(tag);
+                    }
+                }
+                for (String dt : dbTagName) {
+                    if (!updateTag.contains(dt)) {
+                        Tag tag= tagRepository.findTagByPostsAndTag(posts, dt);
+                        tagRepository.deleteById(tag.getTagId());
+                    }
+                }
+                posts.update(requestDto.getContent(), requestDto.getTitle());
+                log.info("이거왜안됨?3");
+                return posts.getPostId();
+            }
+            log.info("아무것도 안드러있음22");
+            posts.update(requestDto.getContent(), requestDto.getTitle());
+            return 0L;
+        } else {
+            log.info("아무것도 안드러있음");
+            return 0L;
+        }
     }
 
     //게시글 수정
@@ -71,6 +132,7 @@ public class PostService {
                     }
                 }
                 posts.update(requestDto.getContent(), requestDto.getImgUrl(), requestDto.getTitle());
+                log.info("이거왜안됨?2");
                 return posts.getPostId();
             } else if (updateTag.size() == dbTagList.size()) {
                 for (String ut : updateTag) {
@@ -88,12 +150,16 @@ public class PostService {
                     }
                 }
                 posts.update(requestDto.getContent(), requestDto.getImgUrl(), requestDto.getTitle());
+                log.info("이거왜안됨?3");
                 return posts.getPostId();
             }
+            log.info("아무것도 안드러있음22");
+            posts.update(requestDto.getContent(), requestDto.getImgUrl(), requestDto.getTitle());
+            return 0L;
         } else {
+            log.info("아무것도 안드러있음");
             return 0L;
         }
-        return 0L;
     }
 
     //게시글 삭제
