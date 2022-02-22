@@ -192,7 +192,7 @@ public class PostService {
         responseDto.setTitle(posts.getTitle());
         responseDto.setContent(posts.getContent());
         responseDto.setPostDate(posts.getCreatedAt());
-        responseDto.setLikeCnt(posts.getLikeUserList().size());
+        responseDto.setLikeCnt(posts.getLikeCnt()); //바꿈
         responseDto.setCommentCnt(posts.getComments().size());
         responseDto.setImgUrl(posts.getImgUrl());
         responseDto.setUsername(posts.getUser().getUsername());

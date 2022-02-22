@@ -28,9 +28,9 @@ public class Posts extends Timestamped{
     @Column(nullable = false)
     private String imgUrl;
 
-    //좋아요 갯수
-//    @Column
-//    private Integer likeCnt;
+   // 좋아요 갯수
+    @Column
+    private Integer likeCnt = 0;
 //    //댓글 갯수
 //    @Column
 //    private Integer commentCnt;

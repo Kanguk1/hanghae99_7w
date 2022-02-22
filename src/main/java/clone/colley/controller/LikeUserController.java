@@ -1,6 +1,7 @@
 package clone.colley.controller;
 
 import clone.colley.dto.Request.LikeUserRequestDto;
+import clone.colley.dto.Response.LikeUserResponseDto;
 import clone.colley.model.User;
 import clone.colley.security.UserDetailsImpl;
 import clone.colley.service.LikeUserService;
@@ -17,7 +18,7 @@ public class LikeUserController {
     }
 
     @GetMapping ("/like/{postId}")
-    public Boolean likeCheck(
+    public LikeUserResponseDto likeCheck(
             @PathVariable Long postId,
             @AuthenticationPrincipal UserDetailsImpl userDetails
 //            @RequestBody LikeUserRequestDto requestDto

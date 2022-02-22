@@ -23,6 +23,7 @@ public class S3Uploader {
     @Value("dongseok-bucket")
     private String bucket;
 
+    //파일 업로드
     public String uploadFile(MultipartFile multipartFile, String dirName) throws IOException {
         File uploadFile = convert(multipartFile)  // 파일 변환할 수 없으면 에러
                 .orElseThrow(() -> new IllegalArgumentException("error: MultipartFile -> File convert fail"));

@@ -1,6 +1,8 @@
 package clone.colley.service;
 
+import clone.colley.dto.Response.LikeUserResponseDto;
 import clone.colley.dto.Response.MainResponseDto;
+import clone.colley.model.LikeUser;
 import clone.colley.model.Posts;
 import clone.colley.repository.MainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,7 @@ public class MainService {
                     posts.getImgUrl(),
                     posts.getTitle(),
                     posts.getComments().size(),
-                    posts.getLikeUserList().size(),
+                    posts.getLikeCnt(),//LikeCnt
                     posts.getUser().getNickname(),
                     posts.getUser().getProfileUrl(),
                     posts.getCreatedAt()
