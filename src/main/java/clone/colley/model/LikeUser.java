@@ -24,13 +24,13 @@ public class LikeUser {
     @JoinColumn(name = "userId")
     private User user;
 
-//    @Column(columnDefinition = "false")
-//    private Boolean isLike = false;
+    @Column
+    private Boolean isLike;
 
 
-//    public LikeUser(Posts posts, User user, boolean requestDto) {
-//        this.posts = posts;
-//        this.user = user;
-//        this.isLike = requestDto;
-//    }
+    public LikeUser(Posts posts, User user, boolean requestDto) {
+        this.posts = posts;
+        this.user = user;
+        this.isLike = requestDto;
+    }
 }
