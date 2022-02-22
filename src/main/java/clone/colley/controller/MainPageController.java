@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -26,8 +27,11 @@ public class MainPageController {
     }
 
     @GetMapping("/search/{findword}")
-    public List<MainResponseDto> getSearchWord(@PathVariable String findword){
-        return mainService.getSearchWord(findword);
+    public HashMap<String,Object> getSearchWord(@PathVariable String findword){
+        HashMap<String,Object> reult=new HashMap<>();
+        reult.put("searchlist",mainService.getSearchWord(findword));
+        reult.put("findword","findword");
+        return reult;
     }
 
 //    //좋아요순 정렬
