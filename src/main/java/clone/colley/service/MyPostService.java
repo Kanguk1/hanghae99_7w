@@ -52,8 +52,9 @@ public class MyPostService {
     }
 
 
+    //마이프로필 수정
     @Transactional
-    public User updateUser(MyPostDto myPostDto, UserDetailsImpl userDetails) {
+    public void updateUser(MyPostDto myPostDto, UserDetailsImpl userDetails) {
 
         User user = userDetails.getUser();
         String nickname = myPostDto.getNickname();
@@ -63,6 +64,5 @@ public class MyPostService {
         }
         user.updateUser(myPostDto);
         userRepository.save(user);
-        return user;
     }
 }
