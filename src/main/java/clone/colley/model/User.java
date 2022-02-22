@@ -51,7 +51,7 @@ public class User {
 
     public void updateUser(MyPostDto myPostDto) {
 
-        this.profileUrl = myPostDto.getUser_profile();
+        this.profileUrl = myPostDto.getProfileUrl();
         this.nickname = myPostDto.getNickname();
         this.introduce = myPostDto.getIntroduce();
     }
