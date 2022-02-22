@@ -4,6 +4,7 @@ import clone.colley.dto.Response.MainResponseDto;
 import clone.colley.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,6 +23,11 @@ public class MainPageController {
     @GetMapping("/")
     public List<MainResponseDto> getAllPageTimed() {
         return mainService.getAllPageTimed();
+    }
+
+    @GetMapping("/search/{findword}")
+    public List<MainResponseDto> getSearchWord(@PathVariable String findword){
+        return mainService.getSearchWord(findword);
     }
 
 //    //좋아요순 정렬
