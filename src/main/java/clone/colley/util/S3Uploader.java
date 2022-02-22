@@ -1,5 +1,7 @@
 package clone.colley.util;
 
+import clone.colley.dto.Request.PostRequestDto;
+import clone.colley.dto.Response.PostResponseDto;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
@@ -20,13 +22,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class S3Uploader {
     private final AmazonS3Client amazonS3Client;
+    PostRequestDto postRequestDto = new PostRequestDto();
+    PostResponseDto postResponseDto = new PostResponseDto();
+//    postResponseDto.setImgUrl(postRequestDto.getImgUrl())));
     @Value("dongseok-bucket")
     private String bucket;
 
     //파일 업로드
     public String uploadFile(MultipartFile multipartFile, String dirName) throws IOException {
         File uploadFile = convert(multipartFile)  // 파일 변환할 수 없으면 에러
-                .orElseThrow(() -> new IllegalArgumentException("error: MultipartFile -> File convert fail"));
+                .orElseThrow(() ->  new IllegalArgumentException("error: MultipartFile -> File convert fail" ));
         return upload(uploadFile, dirName);
     }
 

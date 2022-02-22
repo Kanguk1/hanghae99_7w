@@ -1,14 +1,14 @@
 package clone.colley.dto.Response;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class PostResponseDto {
 
     //post PK
@@ -38,9 +38,6 @@ public class PostResponseDto {
     private String nickname;
 
     //로그인한 유저의 해당 글 좋아요 여부
-    private boolean isLike;
+    private Boolean isLike;
 
-    public void setIsLike(boolean isLike){
-        this.isLike=isLike;
-    }
 }

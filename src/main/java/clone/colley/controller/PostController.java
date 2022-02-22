@@ -50,13 +50,17 @@ public class PostController {
             @PathVariable Long postId,
             PostRequestDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
-        if (multipartFile.equals("")) {
-            return postService.PostUpdateNoImage(requestDto, postId, userDetails);
-        } else {
+
             String image = s3Uploader.uploadFile(multipartFile, "postImage");
             requestDto.setImgUrl(image);
             return  postService.postUpdate(requestDto,postId,userDetails);
-        }
+//        if (multipartFile.isEmpty()) {
+//            return postService.PostUpdateNoImage(requestDto, postId, userDetails);
+//        } else {
+//            String image = s3Uploader.uploadFile(multipartFile, "postImage");
+//            requestDto.setImgUrl(image);
+//            return  postService.postUpdate(requestDto,postId,userDetails);
+//        }
     }
 //    try {
 //        String image = s3Uploader.uploadFile(multipartFile, "postImage");

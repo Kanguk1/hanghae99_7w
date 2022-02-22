@@ -2,6 +2,7 @@ package clone.colley.service;
 
 
 import clone.colley.dto.Request.PostRequestDto;
+import clone.colley.dto.Response.LikeUserResponseDto;
 import clone.colley.dto.Response.PostResponseDto;
 import clone.colley.model.LikeUser;
 import clone.colley.model.Posts;
@@ -186,7 +187,7 @@ public class PostService {
         User user=userRepository.findById(userDetails.getUser().getUserId()).orElseThrow(
                 ()->new NullPointerException("로그인 해주세요")
         );
-
+        LikeUser likeUser = likeUserRepository.findByUserAndPosts(userDetails.getUser(), posts).orElse(null);
         PostResponseDto responseDto = new PostResponseDto();
         responseDto.setPostId(posts.getPostId());
         responseDto.setTitle(posts.getTitle());
@@ -204,8 +205,13 @@ public class PostService {
             tags.add(tag.getTag());
         }
         responseDto.setTags(tags);
-        Optional<LikeUser> likeUserCheck=likeUserRepository.findLikeUserByUserAndPosts(user,posts);
-        responseDto.setIsLike(likeUserCheck.isPresent());
+        if (likeUser == null) {
+            responseDto.setIsLike(false);
+            log.info("널일경우");
+        }else{
+            responseDto.setIsLike(likeUser.getIsLike());
+            log.info("널 아닐경우");
+        }
         return responseDto;
 
     }

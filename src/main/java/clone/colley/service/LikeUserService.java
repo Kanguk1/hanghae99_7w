@@ -39,7 +39,6 @@ public class LikeUserService {
                 () -> new IllegalArgumentException("유저가 존재하지 않습니다")
         );
 
-        List<LikeUser> likeUserList = new ArrayList<>();
         LikeUser likesCheck = likeUserRepository.findByUserAndPosts(userDetails.getUser(), posts).orElse(null);
 
         if (likesCheck == null) {
