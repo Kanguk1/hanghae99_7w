@@ -1,5 +1,6 @@
 package clone.colley.model;
 
+import clone.colley.dto.MyPostDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -45,6 +46,14 @@ public class User {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
+    }
+
+
+    public void updateUser(MyPostDto myPostDto) {
+
+        this.profileUrl = myPostDto.getUser_profile();
+        this.nickname = myPostDto.getNickname();
+        this.introduce = myPostDto.getIntroduce();
     }
 
 }
