@@ -38,6 +38,9 @@ public class PostResponseDto {
     private String nickname;
 
     //로그인한 유저의 해당 글 좋아요 여부
-    private boolean islike;
+    private boolean isLike;
 
+    public void setIsLike(boolean isLike){
+        this.isLike=isLike;
+    }
 }

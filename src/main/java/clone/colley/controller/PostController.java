@@ -21,8 +21,9 @@ public class PostController {
 
     //게시글 상세 조회
     @GetMapping("/post/{postId}")
-    public PostResponseDto postDetail(@PathVariable Long postId){
-        return postService.postDetail(postId);
+    public PostResponseDto postDetail(@PathVariable Long postId,
+                                      @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return postService.postDetail(postId,userDetails);
     }
 
     //    게시글 작성
