@@ -3,10 +3,14 @@ package clone.colley.service;
 
 import clone.colley.dto.Request.PostRequestDto;
 import clone.colley.dto.Response.PostResponseDto;
+import clone.colley.model.LikeUser;
 import clone.colley.model.Posts;
 import clone.colley.model.Tag;
+import clone.colley.model.User;
+import clone.colley.repository.LikeUserRepository;
 import clone.colley.repository.PostRepository;
 import clone.colley.repository.TagRepository;
+import clone.colley.repository.UserRepository;
 import clone.colley.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,12 +18,15 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
     private final TagRepository tagRepository;
+    private final LikeUserRepository likeUserRepository;
+    private final UserRepository userRepository;
 
     //게시글 작성
     @Transactional
@@ -106,10 +113,14 @@ public class PostService {
 
     //게시글 상세조회
     @Transactional
-    public PostResponseDto postDetail(Long postId) {
+    public PostResponseDto postDetail(Long postId,UserDetailsImpl userDetails) {
         Posts posts = postRepository.findById(postId).orElseThrow(
                 () -> new NullPointerException("게시글이 없습니다.")
         );
+        User user=userRepository.findById(userDetails.getUser().getUserId()).orElseThrow(
+                ()->new NullPointerException("로그인 해주세요")
+        );
+
         PostResponseDto responseDto = new PostResponseDto();
         responseDto.setPostId(posts.getPostId());
         responseDto.setTitle(posts.getTitle());
@@ -127,6 +138,8 @@ public class PostService {
             tags.add(tag.getTag());
         }
         responseDto.setTags(tags);
+        Optional<LikeUser> likeUserCheck=likeUserRepository.findLikeUserByUserAndPosts(user,posts);
+        responseDto.setIsLike(likeUserCheck.isPresent());
         return responseDto;
 
     }

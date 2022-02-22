@@ -8,7 +8,8 @@ import javax.persistence.*;
 @Getter
 @Entity // DB 테이블 역할을 합니다.
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
+//        (access = AccessLevel.PROTECTED)
 public class LikeUser {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +24,13 @@ public class LikeUser {
     @JoinColumn(name = "userId")
     private User user;
 
-    @Column(columnDefinition = "false")
-    private Boolean isLike = false;
+//    @Column(columnDefinition = "false")
+//    private Boolean isLike = false;
 
 
-    public LikeUser(Posts posts, User user, boolean requestDto) {
-        this.posts = posts;
-        this.user = user;
-        this.isLike = requestDto;
-    }
+//    public LikeUser(Posts posts, User user, boolean requestDto) {
+//        this.posts = posts;
+//        this.user = user;
+//        this.isLike = requestDto;
+//    }
 }

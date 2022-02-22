@@ -16,13 +16,19 @@ public class LikeUserController {
         this.likeUserService = likeUserService;
     }
 
-    @GetMapping ("/like/{postId}")
-    public Boolean likeCheck(
-            @PathVariable Long postId,
-            @AuthenticationPrincipal UserDetailsImpl userDetails,
-            @RequestBody LikeUserRequestDto requestDto){
+//    @GetMapping ("/like/{postId}")
+//    public Boolean likeCheck(
+//            @PathVariable Long postId,
+//            @AuthenticationPrincipal UserDetailsImpl userDetails,
+//            @RequestBody LikeUserRequestDto requestDto){
+//
+////        User user = userDetails.getUser();
+//        return likeUserService.likeCheck(postId, userDetails, requestDto);
+//    }
 
-//        User user = userDetails.getUser();
-        return likeUserService.likeCheck(postId, userDetails, requestDto);
+    @GetMapping("/like/{postId}")
+    public Boolean likeCheck(@PathVariable Long postId,
+                             @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return likeUserService.likeCheck1(postId,userDetails);
     }
 }
