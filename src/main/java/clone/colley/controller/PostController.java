@@ -3,6 +3,8 @@ package clone.colley.controller;
 
 import clone.colley.dto.Request.PostRequestDto;
 import clone.colley.dto.Response.PostResponseDto;
+import clone.colley.model.Posts;
+import clone.colley.repository.PostRepository;
 import clone.colley.security.UserDetailsImpl;
 import clone.colley.service.PostService;
 import clone.colley.util.S3Uploader;
@@ -20,6 +22,7 @@ import java.io.IOException;
 public class PostController {
     private final PostService postService;
     private final S3Uploader s3Uploader;
+    private final PostRepository postRepository;
 
     //게시글 상세 조회
     @GetMapping("/post/{postId}")
@@ -46,14 +49,27 @@ public class PostController {
     //게시글 수정
     @PatchMapping("/post/{postId}")
     public Long postUpdate(
-            @RequestPart("image") MultipartFile multipartFile,
+            @RequestPart(value = "image", required = false) MultipartFile multipartFile,
             @PathVariable Long postId,
             PostRequestDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
+            if (multipartFile==null) {
+                log.info("되냐");
+                return postService.PostUpdateNoImage(requestDto,postId,userDetails);
+            } else {
+                String image = s3Uploader.uploadFile(multipartFile, "postImage");
+                 requestDto.setImgUrl(image);
+                return  postService.postUpdate(requestDto,postId,userDetails);
+            }
+            }
 
-            String image = s3Uploader.uploadFile(multipartFile, "postImage");
-            requestDto.setImgUrl(image);
-            return  postService.postUpdate(requestDto,postId,userDetails);
+
+
+//            String image = s3Uploader.uploadFile(multipartFile, "postImage");
+//            requestDto.setImgUrl(image);
+//            return  postService.postUpdate(requestDto,postId,userDetails);
+
+
 //        if (multipartFile.isEmpty()) {
 //            return postService.PostUpdateNoImage(requestDto, postId, userDetails);
 //        } else {
@@ -61,8 +77,9 @@ public class PostController {
 //            requestDto.setImgUrl(image);
 //            return  postService.postUpdate(requestDto,postId,userDetails);
 //        }
-    }
-//    try {
+
+//
+//                    try {
 //        String image = s3Uploader.uploadFile(multipartFile, "postImage");
 //        requestDto.setImgUrl(image);
 //        return  postService.postUpdate(requestDto,postId,userDetails);
