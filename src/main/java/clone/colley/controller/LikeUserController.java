@@ -16,7 +16,7 @@ public class LikeUserController {
         this.likeUserService = likeUserService;
     }
 
-    @PostMapping("/like/{postId}")
+    @GetMapping ("/like/{postId}")
     public Boolean likeCheck(
             @PathVariable Long postId,
             @AuthenticationPrincipal UserDetailsImpl userDetails,

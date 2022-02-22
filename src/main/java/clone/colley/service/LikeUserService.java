@@ -37,7 +37,7 @@ public class LikeUserService {
 
         if (likesCheck == null) {
             log.info("널일경우");
-            LikeUser likeUser = new LikeUser(posts, user, false);
+            LikeUser likeUser = new LikeUser(posts, user, true);
             likeUserRepository.save(likeUser);
         } else {
             log.info("널 아닐 경우");
