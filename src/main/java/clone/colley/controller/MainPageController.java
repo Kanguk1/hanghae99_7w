@@ -30,7 +30,7 @@ public class MainPageController {
     public HashMap<String,Object> getSearchWord(@PathVariable String findword){
         HashMap<String,Object> reult=new HashMap<>();
         reult.put("searchlist",mainService.getSearchWord(findword));
-        reult.put("findword","findword");
+        reult.put("findword",findword);
         return reult;
     }
 
