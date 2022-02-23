@@ -12,5 +12,7 @@ import lombok.Setter;
 public class UserProfileRequestDto {
 
     private String profileImageUrl;
+    private String introduce;
+    private String nickname;
 
 }

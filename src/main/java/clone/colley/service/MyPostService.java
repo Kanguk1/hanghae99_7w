@@ -26,7 +26,9 @@ public class MyPostService {
 
 
     public MyPostResponse myPost(UserDetailsImpl userDetails) {
-        User user = userDetails.getUser();
+        User user = userRepository.findById(userDetails.getUser().getUserId()).orElseThrow(
+                () -> new IllegalArgumentException("해당 유저 없음"));
+        MyPostResponse myPostResponse = new MyPostResponse();
 
         // userDetails 값과 동일한 작성자를 가진 게시글들을 db에서 찾아옴 = postList
         List<Posts> postList = postRepository.findAllByUser(userDetails.getUser());
@@ -34,18 +36,18 @@ public class MyPostService {
         // 리턴할 값( MainResponseDto 배열 ) 을 정의함
         List<MainResponseDto> mainResponseDtoList = new ArrayList<>();
 
+
         // db 에서 조회한 게시글들을 리턴할 값으로 정의한 List에 담음
         for (Posts posts : postList) {
-            MainResponseDto mainResponseDto = new MainResponseDto(posts);
+            MainResponseDto mainResponseDto = new MainResponseDto(posts, user);
             mainResponseDtoList.add(mainResponseDto);
         }
 
-          MyPostResponse myPostResponse = new MyPostResponse();
-
-          myPostResponse.setStatus(200);
+        myPostResponse.setStatus(200);
         myPostResponse.setNickName(user.getNickname());
         myPostResponse.setProfileUrl(user.getProfileUrl());
         myPostResponse.setIntroduce(user.getIntroduce());
+
         myPostResponse.setMainResponseDtoList(mainResponseDtoList);
 
         // 해당 list 리턴
@@ -70,17 +72,17 @@ public class MyPostService {
 
     // 유저 정보 수정_파일 업로드.ver
     @Transactional
-    public User updateUser(UserProfileRequestDto userProfileRequestDto, User user) {
+    public User updateUser(UserProfileRequestDto userProfileRequestDto, UserDetailsImpl userDetails) {
 
-        User user1 = userRepository.findById(user.getUserId()).orElseThrow(
+        User user = userRepository.findById(userDetails.getUser().getUserId()).orElseThrow(
                 () -> new IllegalArgumentException("해당 유저 없음"));
 
-        // 유저 정보 변경
-        if (userProfileRequestDto.getProfileImageUrl() == null) {
-            throw new IllegalArgumentException("프로필을 입력해주세요.");
-        }
-        User user2 = new User(userProfileRequestDto, user1);
-        userRepository.save(user2);
-        return user2;
+        user.update(userProfileRequestDto.getProfileImageUrl(), userProfileRequestDto.getIntroduce(), userProfileRequestDto.getNickname());
+        userRepository.save(user);
+        return user;
     }
 }
+// 유저 정보 변경
+//        if (userProfileRequestDto.getProfileImageUrl() == null) {
+//            throw new IllegalArgumentException("프로필을 입력해주세요.");
+//        }

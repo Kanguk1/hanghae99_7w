@@ -1,12 +1,11 @@
 package clone.colley.dto.Response;
 
 import clone.colley.model.Posts;
+import clone.colley.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Data
@@ -52,7 +51,7 @@ public class MainResponseDto {
 //    }
 
     //////////////////////////////////
-    public MainResponseDto(Posts posts)
+    public MainResponseDto(Posts posts, User user)
     {
         this.postId = posts.getPostId();
         this.postDate = posts.getCreatedAt();
@@ -60,6 +59,7 @@ public class MainResponseDto {
         this.imgUrl = posts.getImgUrl();
         this.nickname = posts.getUser().getNickname();
         this.likeCnt = posts.getLikeCnt();
+        this.profileUrl = user.getProfileUrl();
         this.commentCnt = posts.getComments().size();
     }
 }

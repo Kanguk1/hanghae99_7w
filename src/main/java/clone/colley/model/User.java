@@ -49,17 +49,20 @@ public class User {
         this.nickname = nickname;
     }
 
-
-    public void updateUser(MyPostDto myPostDto) {
-
-        this.profileUrl = myPostDto.getProfileUrl();
-        this.nickname = myPostDto.getNickname();
-        this.introduce = myPostDto.getIntroduce();
+    public void update(String profileImageUrl, String introduce, String nickname) {
+        this.profileUrl = profileImageUrl;
+        this.introduce = introduce;
+        this.nickname = nickname;
     }
-
 
     public User(UserProfileRequestDto userProfileRequestDto, User user) {
         this.profileUrl = userProfileRequestDto.getProfileImageUrl();
     }
+
+    //    public void updateUser(MyPostDto myPostDto) {
+//        this.profileUrl = myPostDto.getProfileUrl();
+//        this.nickname = myPostDto.getNickname();
+//        this.introduce = myPostDto.getIntroduce();
+//    }
 
 }
