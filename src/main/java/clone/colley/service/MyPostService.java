@@ -54,21 +54,17 @@ public class MyPostService {
         return myPostResponse;
     }
 
+    // 유저 정보 수정_파일 업로드 안한 버전.ver
+    @Transactional
+    public User updateUserNoImage(UserProfileRequestDto userProfileRequestDto, UserDetailsImpl userDetails) {
 
-//    // 유저정보 수정_파일 x
-//    @Transactional
-//    public void updateUser(MyPostDto myPostDto, UserDetailsImpl userDetails) {
-//
-//        User user = userDetails.getUser();
-//        String nickname = myPostDto.getNickname();
-//
-//        if (nickname == null) {
-//            throw new NullPointerException("닉네임을 입력해주세요");
-//        }
-//        user.updateUser(myPostDto);
-//        userRepository.save(user);
-//    }
+        User user = userRepository.findById(userDetails.getUser().getUserId()).orElseThrow(
+                () -> new IllegalArgumentException("해당 유저 없음"));
 
+        user.update(userProfileRequestDto.getIntroduce(), userProfileRequestDto.getNickname());
+        userRepository.save(user);
+        return user;
+    }
 
     // 유저 정보 수정_파일 업로드.ver
     @Transactional
@@ -77,7 +73,7 @@ public class MyPostService {
         User user = userRepository.findById(userDetails.getUser().getUserId()).orElseThrow(
                 () -> new IllegalArgumentException("해당 유저 없음"));
 
-        user.update(userProfileRequestDto.getProfileImageUrl(), userProfileRequestDto.getIntroduce(), userProfileRequestDto.getNickname());
+        user.update(userProfileRequestDto.getProfileUrl(), userProfileRequestDto.getIntroduce(), userProfileRequestDto.getNickname());
         userRepository.save(user);
         return user;
     }

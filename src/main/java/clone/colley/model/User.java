@@ -55,8 +55,13 @@ public class User {
         this.nickname = nickname;
     }
 
+    public void update(String introduce, String nickname) {
+        this.introduce = introduce;
+        this.nickname = nickname;
+    }
+
     public User(UserProfileRequestDto userProfileRequestDto, User user) {
-        this.profileUrl = userProfileRequestDto.getProfileImageUrl();
+        this.profileUrl = userProfileRequestDto.getProfileUrl();
     }
 
     //    public void updateUser(MyPostDto myPostDto) {

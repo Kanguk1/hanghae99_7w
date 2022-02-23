@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserProfileRequestDto {
 
-    private String profileImageUrl;
+    private String profileUrl;
     private String introduce;
     private String nickname;
 

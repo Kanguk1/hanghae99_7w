@@ -49,16 +49,17 @@ public class MyPostController {
 
     // 유저 정보 수정_파일 업로드.ver
     @PatchMapping("/user/mypost/update")
-    public MyResponse updateUser(@RequestPart(value = "image") MultipartFile multipartFile,
+    public MyResponse updateUser(
+            @RequestPart(value = "image", required = false) MultipartFile multipartFile,
                                  @AuthenticationPrincipal UserDetailsImpl userDetails,
                                  UserProfileRequestDto userProfileRequestDto) throws IOException {
-
-        String profileImageUrl = s3Uploader.uploadFile(multipartFile, "profileImage");
-
-        userProfileRequestDto.setProfileImageUrl(profileImageUrl);
-
-        myPostService.updateUser(userProfileRequestDto, userDetails);
-
+        if(multipartFile==null){
+            myPostService.updateUserNoImage(userProfileRequestDto, userDetails);
+        }else {
+            String image = s3Uploader.uploadFile(multipartFile, "profileImage");
+            userProfileRequestDto.setProfileUrl(image);
+            myPostService.updateUser(userProfileRequestDto, userDetails);
+        }
         MyResponse myresponse = new MyResponse();
         myresponse.setResult(true);
         return myresponse;
