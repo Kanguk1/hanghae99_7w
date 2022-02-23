@@ -94,6 +94,15 @@ public class PostService {
                 posts.update(requestDto.getContent(), requestDto.getTitle());
                 log.info("이거왜안됨?3");
                 return posts.getPostId();
+            }else if(updateTag.size()<dbTagList.size()){
+                for(String dt:dbTagName){
+                    if(!updateTag.contains(dt)){
+                        Tag tag=tagRepository.findTagByPostsAndTag(posts,dt);
+                        tagRepository.deleteById(tag.getTagId());
+                    }
+                }
+                posts.update(requestDto.getContent(), requestDto.getTitle());
+                return posts.getPostId();
             }
             log.info("아무것도 안드러있음22");
             posts.update(requestDto.getContent(), requestDto.getTitle());
@@ -152,6 +161,15 @@ public class PostService {
                 }
                 posts.update(requestDto.getContent(), requestDto.getImgUrl(), requestDto.getTitle());
                 log.info("이거왜안됨?3");
+                return posts.getPostId();
+            }else if(updateTag.size()<dbTagList.size()){
+                for(String dt:dbTagName){
+                    if(!updateTag.contains(dt)){
+                        Tag tag=tagRepository.findTagByPostsAndTag(posts,dt);
+                        tagRepository.deleteById(tag.getTagId());
+                    }
+                }
+                posts.update(requestDto.getContent(), requestDto.getTitle());
                 return posts.getPostId();
             }
             log.info("아무것도 안드러있음22");
