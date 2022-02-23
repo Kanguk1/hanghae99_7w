@@ -28,10 +28,12 @@ public class MainPageController {
 
     @GetMapping("/search/{findword}")
     public HashMap<String,Object> getSearchWord(@PathVariable String findword){
-        HashMap<String,Object> reult=new HashMap<>();
-        reult.put("searchlist",mainService.getSearchWord(findword));
-        reult.put("findword",findword);
-        return reult;
+        HashMap<String,Object> result=new HashMap<>();
+        result.put("searchlist",mainService.getSearchWord(findword));
+        //태그로 검색된 리스트 반환
+        result.put("searchtag",mainService.getSearchTag(findword));
+        result.put("findword",findword);
+        return result;
     }
 
 //    //좋아요순 정렬

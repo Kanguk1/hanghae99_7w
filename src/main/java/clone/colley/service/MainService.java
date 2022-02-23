@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class MainService {
@@ -39,17 +40,34 @@ public class MainService {
                     posts.getUser().getNickname(),
                     posts.getUser().getProfileUrl(),
                     posts.getCreatedAt()
-                    );
+            );
             mainResponseDtoList.add(mainResponseDto);
         }
         return mainResponseDtoList;
     }
 
     public List<MainResponseDto> getSearchWord(String findword) {
-            List<Posts> postsList=postRepository.findPosts(findword);
-            List<MainResponseDto> mainResponseDtoList=new ArrayList<>();
-            for(Posts posts:postsList){
-                MainResponseDto mainResponseDto=new MainResponseDto(
+        List<Posts> postsList = postRepository.findPosts(findword);
+        List<MainResponseDto> mainResponseDtoList = new ArrayList<>();
+        for (Posts posts : postsList) {
+            MainResponseDto mainResponseDto = new MainResponseDto(
+                    posts.getPostId(),
+                    posts.getImgUrl(),
+                    posts.getTitle(),
+                    posts.getComments().size(),
+                    posts.getLikeCnt(),//LikeCnt
+                    posts.getUser().getNickname(),
+                    posts.getUser().getProfileUrl(),
+                    posts.getCreatedAt()
+            );
+            mainResponseDtoList.add(mainResponseDto);
+        }
+
+        List<Tag> tagList = tagRepository.findTags(findword);
+        for (Tag tag : tagList) {
+            Posts posts = tag.getPosts();
+            if (!postsList.contains(posts)) {
+                MainResponseDto mainResponseDto = new MainResponseDto(
                         posts.getPostId(),
                         posts.getImgUrl(),
                         posts.getTitle(),
@@ -59,28 +77,33 @@ public class MainService {
                         posts.getUser().getProfileUrl(),
                         posts.getCreatedAt()
                 );
-                        mainResponseDtoList.add(mainResponseDto);
+                mainResponseDtoList.add(mainResponseDto);
             }
-
-            List<Tag> tagList=tagRepository.findTags(findword);
-            for(Tag tag:tagList){
-                Posts posts=tag.getPosts();
-                if(!postsList.contains(posts)){
-                    MainResponseDto mainResponseDto=new MainResponseDto(
-                            posts.getPostId(),
-                            posts.getImgUrl(),
-                            posts.getTitle(),
-                            posts.getComments().size(),
-                            posts.getLikeCnt(),//LikeCnt
-                            posts.getUser().getNickname(),
-                            posts.getUser().getProfileUrl(),
-                            posts.getCreatedAt()
-                    );
-                    mainResponseDtoList.add(mainResponseDto);
-                }
-            }
+        }
         return mainResponseDtoList;
     }
+
+    public List<MainResponseDto> getSearchTag(String findword) {
+        List<MainResponseDto> mainResponseDtoList = new ArrayList<>();
+        List<Tag> tagList = tagRepository.findTags(findword);
+        for (Tag tag : tagList) {
+            Posts posts = tag.getPosts();
+            MainResponseDto mainResponseDto = new MainResponseDto(
+                    posts.getPostId(),
+                    posts.getImgUrl(),
+                    posts.getTitle(),
+                    posts.getComments().size(),
+                    posts.getLikeCnt(),//LikeCnt
+                    posts.getUser().getNickname(),
+                    posts.getUser().getProfileUrl(),
+                    posts.getCreatedAt()
+            );
+            mainResponseDtoList.add(mainResponseDto);
+        }
+        return mainResponseDtoList;
+    }
+
+}
 
 //    public List<MainResponseDto> getAllPageLiked() {
 //        List<Posts> postsList = mainRepository.OrderByLikeCntDesc();
@@ -102,4 +125,4 @@ public class MainService {
 //        }
 //        return mainResponseDtoList;
 //    }
-}
+
