@@ -27,8 +27,8 @@ public class PostController {
     //게시글 상세 조회
     @GetMapping("/post/{postId}")
     public PostResponseDto postDetail(@PathVariable Long postId,
-                                      @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return postService.postDetail(postId,userDetails);
+                                      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return postService.postDetail(postId, userDetails);
     }
 
     //    게시글 작성
@@ -42,7 +42,7 @@ public class PostController {
         String image = s3Uploader.uploadFile(multipartFile, "postImage");
         requestDto.setImgUrl(image);
 
-        return postService.postRegister(requestDto,userDetails);
+        return postService.postRegister(requestDto, userDetails);
     }
 
 
@@ -53,16 +53,15 @@ public class PostController {
             @PathVariable Long postId,
             PostRequestDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
-            if (multipartFile==null) {
-                log.info("되냐");
-                return postService.PostUpdateNoImage(requestDto,postId,userDetails);
-            } else {
-                String image = s3Uploader.uploadFile(multipartFile, "postImage");
-                 requestDto.setImgUrl(image);
-                return  postService.postUpdate(requestDto,postId,userDetails);
-            }
-            }
-
+        if (multipartFile == null) {
+            log.info("되냐");
+            return postService.PostUpdateNoImage(requestDto, postId, userDetails);
+        } else {
+            String image = s3Uploader.uploadFile(multipartFile, "postImage");
+            requestDto.setImgUrl(image);
+            return postService.postUpdate(requestDto, postId, userDetails);
+        }
+    }
 
 
 //            String image = s3Uploader.uploadFile(multipartFile, "postImage");
@@ -93,7 +92,7 @@ public class PostController {
     //게시글 삭제
     @DeleteMapping("/post/{postId}")
     public boolean postDelete(@PathVariable Long postId,
-                              @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return  postService.deletePost(postId,userDetails);
+                              @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return postService.deletePost(postId, userDetails);
     }
 }
