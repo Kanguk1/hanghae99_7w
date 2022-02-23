@@ -1,6 +1,7 @@
 package clone.colley.service;
 
 import clone.colley.dto.MyPostDto;
+import clone.colley.dto.Request.UserProfileRequestDto;
 import clone.colley.dto.Response.MainResponseDto;
 import clone.colley.dto.Response.MyPostResponse;
 import clone.colley.model.Posts;
@@ -52,17 +53,34 @@ public class MyPostService {
     }
 
 
-    //마이프로필 수정
+//    // 유저정보 수정_파일 x
+//    @Transactional
+//    public void updateUser(MyPostDto myPostDto, UserDetailsImpl userDetails) {
+//
+//        User user = userDetails.getUser();
+//        String nickname = myPostDto.getNickname();
+//
+//        if (nickname == null) {
+//            throw new NullPointerException("닉네임을 입력해주세요");
+//        }
+//        user.updateUser(myPostDto);
+//        userRepository.save(user);
+//    }
+
+
+    // 유저 정보 수정_파일 업로드.ver
     @Transactional
-    public void updateUser(MyPostDto myPostDto, UserDetailsImpl userDetails) {
+    public User updateUser(UserProfileRequestDto userProfileRequestDto, User user) {
 
-        User user = userDetails.getUser();
-        String nickname = myPostDto.getNickname();
+        User user1 = userRepository.findById(user.getUserId()).orElseThrow(
+                () -> new IllegalArgumentException("해당 유저 없음"));
 
-        if (nickname == null) {
-            throw new NullPointerException("닉네임을 입력해주세요");
+        // 유저 정보 변경
+        if (userProfileRequestDto.getProfileImageUrl() == null) {
+            throw new IllegalArgumentException("프로필을 입력해주세요.");
         }
-        user.updateUser(myPostDto);
-        userRepository.save(user);
+        User user2 = new User(userProfileRequestDto, user1);
+        userRepository.save(user2);
+        return user2;
     }
 }

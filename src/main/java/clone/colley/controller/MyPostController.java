@@ -2,7 +2,9 @@ package clone.colley.controller;
 
 import clone.colley.dto.MyPostDto;
 import clone.colley.dto.MyResponse;
+import clone.colley.dto.Request.UserProfileRequestDto;
 import clone.colley.dto.Response.MyPostResponse;
+import clone.colley.model.User;
 import clone.colley.security.UserDetailsImpl;
 import clone.colley.service.MyPostService;
 import clone.colley.util.S3Uploader;
@@ -31,22 +33,36 @@ public class MyPostController {
     }
 
 
+//    // 유저정보 수정_파일 x
+//    @PutMapping("/user/mypost/update")
+//    public MyResponse updateUser(
+//            @Validated @RequestBody MyPostDto myPostDto,
+//            @AuthenticationPrincipal UserDetailsImpl userDetails
+//    ) {
+//        myPostService.updateUser(myPostDto, userDetails);
+//
+//        MyResponse myResponse = new MyResponse();
+//        myResponse.setResult(true);
+//        return myResponse;
+//    }
 
-    // 유저정보 수정.
-    @PatchMapping("/user/mypost/update")
-    public MyResponse updateUser(
-            @RequestPart("image") MultipartFile multipartFile,
-            MyPostDto myPostDto,
-            @AuthenticationPrincipal UserDetailsImpl userDetails
-    ) throws IOException {
-        String image = s3Uploader.uploadFile(multipartFile,"profileUrl");
-        myPostDto.setProfileUrl(image);
 
-        myPostService.updateUser(myPostDto, userDetails);
+    // 유저 정보 수정_파일 업로드.ver
+    @PutMapping("/user/mypost/update")
+    public MyResponse updateUser(@RequestPart(value = "profileImageUrl") MultipartFile multipartFile,
+                                 @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
 
-        MyResponse myResponse = new MyResponse();
-        myResponse.setResult(true);
-        return myResponse;
+        String profileImageUrl = s3Uploader.uploadFile(multipartFile, "profileImage");
+        User user = userDetails.getUser();
+
+        UserProfileRequestDto userProfileRequestDto = new UserProfileRequestDto();
+
+        userProfileRequestDto.setProfileImageUrl(profileImageUrl);
+
+        myPostService.updateUser(userProfileRequestDto, user);
+
+        MyResponse myresponse = new MyResponse();
+        myresponse.setResult(true);
+        return myresponse;
     }
-
 }

@@ -1,6 +1,7 @@
 package clone.colley.model;
 
 import clone.colley.dto.MyPostDto;
+import clone.colley.dto.Request.UserProfileRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -54,6 +55,11 @@ public class User {
         this.profileUrl = myPostDto.getProfileUrl();
         this.nickname = myPostDto.getNickname();
         this.introduce = myPostDto.getIntroduce();
+    }
+
+
+    public User(UserProfileRequestDto userProfileRequestDto, User user) {
+        this.profileUrl = userProfileRequestDto.getProfileImageUrl();
     }
 
 }
