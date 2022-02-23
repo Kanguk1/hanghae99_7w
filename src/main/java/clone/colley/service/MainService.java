@@ -98,7 +98,9 @@ public class MainService {
                     posts.getUser().getProfileUrl(),
                     posts.getCreatedAt()
             );
-            mainResponseDtoList.add(mainResponseDto);
+            if(!mainResponseDtoList.contains(mainResponseDto)){
+                mainResponseDtoList.add(mainResponseDto);
+            }
         }
         return mainResponseDtoList;
     }
