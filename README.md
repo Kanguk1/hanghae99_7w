@@ -13,43 +13,20 @@ Colley
 콜리는 자신의 덕질을 뽐내고, 정보를 나누면서 취향을 공유하는 덕질 플랫폼이에요
 
  
+# 항해99 6조 클론코딩 - 콜리
+<img width="207" alt="스크린샷 2022-02-24 오후 2 21 34" src="https://user-images.githubusercontent.com/89513776/155463152-66221846-ef4c-4565-8230-d05fd9d71ff2.png">
 
-### 와이어프레임 및 기능 설계
+[콜리를 구경해보세요!](http://colley-hanghea.s3-website.ap-northeast-2.amazonaws.com/)
 
-- 초본
-    
-    {와이어프레임}
-    
-    ![스크린샷 2022-02-19 오후 4.54.16.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c978aa81-97f9-4cc4-9524-938c86563baa/스크린샷_2022-02-19_오후_4.54.16.png)
-    
-    ㅇ 로그인페이지
-    ㄴ 회원가입/로그인 기능
-    ㄴ 수집 : 닉네임/아이디/비밀번호
-    ㄴ 계정 중복확인
-    
-    ㅇ 메인페이지(게시글 조회)
-    ㄴ 하트/시간순 정렬
-    ㄴ 네비게이션바 (홈/등록/마이페이지)
-    ㄴ 검색기능 (문구/태그)
-    ㄴ 게시글 무한스크롤 기능
-    
-    ㅇ 검색페이지
-    ㄴ 검색된 게시글 리스트 조회 (검색어/태그조회)
-    
-    ㄴ 네비게이션바 (홈/등록/마이페이지)
-    
-    ㅇ 게시글 상세페이지
-    ㄴ 댓글 기능 (삭제)
-    ㄴ 조회: 게시글 제목/본문/태그/하트 수/댓글 수/댓글리스트(수정/삭제)
-    
-    ㄴ 네비게이션바 (홈/등록/마이페이지)
-    
-    ㅇ 게시글 등록페이지
-    ㄴ 사진 1장 업로드 구현 (영상/gif제외)
-    ㄴ 제목/본문/태그 작성
-    
-    ㅇ 마이페이지
-    ㄴ 내 정보수정(수정항목 : 사진/닉네임/소개글)
-    ㄴ 작성한 게시글 조회
-    
-    ㄴ 네비게이션바 (홈/등록/마이페이지)
+#### 프론트 - 안진희,소정현 [깃허브](https://github.com/aaanjini/hanghea_clone) 
+#### 백 - 이강욱,신동석,최원준 [깃허브](https://github.com/Kanguk1/hanghae99_7w)
+
+<hr/>
+
+## API 설계서🌈
+https://www.notion.so/7-6-0d5d64e9fb2a41c1a4347383853d7e3b
+
+
+## 와이어프레임✨
+
+<img width="475" alt="스크린샷 2022-02-24 오후 2 27 33" src="https://user-images.githubusercontent.com/89513776/155463686-abb4396f-59d7-43fd-9bca-47dc72e4697f.png" style="width:300px; display:inline-block"> <img width="496" alt="스크린샷 2022-02-24 오후 2 27 44" src="https://user-images.githubusercontent.com/89513776/155463699-e4434ca7-469e-44d4-be07-0191676f8980.png" style="width:300px; display:inline-block"><img width="459" alt="스크린샷 2022-02-24 오후 2 27 57" src="https://user-images.githubusercontent.com/89513776/155463705-8c6716a7-159b-40c5-abc2-8f6b86a1976f.png" style="width:300px; display:inline-block"><img width="474" alt="스크린샷 2022-02-24 오후 2 28 03" src="https://user-images.githubusercontent.com/89513776/155463709-ba715832-422f-4f97-a02e-b2ac906c7061.png" style="width:300px; display:inline-block"><img width="476" alt="스크린샷 2022-02-24 오후 2 28 12" src="https://user-images.githubusercontent.com/89513776/155463716-cb6e385e-865b-4929-bcde-6f7830972d7d.png" style="width:300px; display:inline-block">
